@@ -1,0 +1,176 @@
+#nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 70px;
+    /*padding: 3% 0;*/
+    
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 50;
+}
+
+#nav.fullColor {
+    background-color: #202020;
+}
+
+#nav img {
+    width: 7%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 1%;
+    right: auto;
+    margin: auto;
+}
+
+#nav #logoMenu {
+    background: url("../images/logoMenu.png") no-repeat center;
+    background-size: contain;
+    width: 120px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 1%;
+    right: auto;
+    margin: auto;
+}
+/* ICON MENU */
+
+.nav-icon {
+    width: 35px;
+    height: 60%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: auto;
+    right: 2%;
+    margin: auto;
+    z-index: 50;
+}
+
+.nav-icon:after,
+.nav-icon:before,
+.nav-icon div {
+    background-color: #fff;
+    content: '';
+    display: block;
+    height: 3px;
+    margin: 7px 0;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.nav-icon.open:before {
+    transform: translateY(12px) rotate(135deg);
+    -moz-transform: translateY(12px) rotate(135deg);
+    -webkit-transform: translateY(12px) rotate(135deg);
+}
+
+.nav-icon.open:after {
+    transform: translateY(-8px) rotate(-135deg);
+    -moz-transform: translateY(-8px) rotate(-135deg);
+    -webkit-transform: translateY(-8px) rotate(-135deg);
+}
+
+.nav-icon.open div {
+    -moz-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+/* ICON MENU END */
+
+.cbp-spmenu {
+    background-color: #fff !important;
+    position: fixed;
+}
+
+.cbp-spmenu hr {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.cbp-spmenu h3 {
+    height: 8%;
+    margin: 0;
+    background-color: transparent;
+}
+
+.cbp-spmenu a {
+    display: block;
+    color: #646464;
+    font-size: 1em;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.cbp-spmenu a:hover {
+    text-decoration: line-through;
+}
+
+.cbp-spmenu a:active {
+    background: #afdefa;
+    color: #47a3da;
+}
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-vertical {
+    background-color: #fff;
+    width: 30%;
+    height: 100%;
+    top: 0;
+    z-index: 45;
+}
+
+.cbp-spmenu-vertical a {
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.cbp-spmenu-right {
+    right: -30%;
+}
+/* Example media queries */
+
+@media screen and (max-width: 55.1875em) {
+    .cbp-spmenu-horizontal {
+        font-size: 75%;
+        height: 110px;
+    }
+    .cbp-spmenu-top {
+        top: -110px;
+    }
+    .cbp-spmenu-bottom {
+        bottom: -110px;
+    }
+}
+
+@media screen and (max-height: 26.375em) {
+    .cbp-spmenu-vertical {
+        font-size: 90%;
+        width: 190px;
+    }
+    .cbp-spmenu-push-toleft {
+        left: -190px;
+    }
+    .cbp-spmenu-right {
+        right: -190px;
+    }
+    .cbp-spmenu-push-toright {
+        left: 190px;
+    }
+}
+#panel{
+    /*position: absolute; 
+    top:70px; 
+    width: 100%;*/
+    height: 100%;
+    background:#000;
+    position: relative;
+}
