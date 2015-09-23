@@ -74,7 +74,7 @@
         animationMenu: function(){
             
             TweenLite.set("#cbp-spmenu-s2", {perspective: 400});
-            tl.to("#cbp-spmenu-s2", 0.3, { css: { right: "0px"}}, 0);
+            tl.to("#cbp-spmenu-s2, #panel", 0.3, { css: { right: "0px"}}, 0);
             tl.from("#panel", 0.3, {rotationY: 60}, 0);
             tl.to("body", 0.3, {css: {right: "30%"}}, "-=0.3"); 
             
