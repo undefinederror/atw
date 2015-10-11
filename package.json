@@ -1,0 +1,13 @@
+{
+  "name": "atw",
+  "version": "0.0.0",
+  "description": "atw",
+  "main": "app.js",
+  "author": {
+    "name": "vinz",
+    "email": ""
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
