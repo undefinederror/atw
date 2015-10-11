@@ -190,3 +190,4 @@ ModelManifest.xml
 
 # custom
 .ntvs_analysis.dat
+!atw/bin
