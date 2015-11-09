@@ -43,6 +43,7 @@
   <ItemGroup>
     <Folder Include="atw\" />
     <Folder Include="atw\public\" />
+    <Folder Include="atw\public\javascripts\" />
     <Folder Include="atw\public\stylesheets\" />
     <Folder Include="atw\views\" />
     <Folder Include="lib\" />

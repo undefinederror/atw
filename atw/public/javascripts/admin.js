@@ -14,9 +14,10 @@
     // binds
     $qId.on('change', function () {
         var id = $(this).val();
-        queryDB({method:'get',args: {"_id":id}})
+        queryDB({method:'get',args: id})
          .then(function (res) {
             konsole(res);
+            populate(res);
             //var arrIds = res.rows.map(function (item) {
             //    return item.id
             //}).sort(function (a, b) {
@@ -78,6 +79,11 @@
         $qId.html(out);
     }
     
+    function populate(obj) {
+        for (var p in obj) { 
+            $('input[data-db=' + p + ']').val(obj[p]);
+        }
+    }
     
     function init() { 
         getIds();
