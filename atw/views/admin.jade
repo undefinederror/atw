@@ -1,0 +1,42 @@
+﻿- var letterArr=['a','b','c','d','e','f','g','h','i','l','m','n','o','p','q','r','s','t','u','v','z']
+
+doctype html
+html
+head
+    title Around the Admin
+    link(rel="stylesheet" type="text/css" href="bootstrap.css")
+    link(rel="stylesheet" type="text/css" href="admin.css")
+    link(rel="stylesheet" type="text/css" href="prism.css")
+    script(src="https://code.jquery.com/jquery-latest.min.js")
+    script(src="bootstrap.min.js")
+    script(src="prism.js" data-manual)
+body
+    nav
+    section.buttons
+        button(data-role="create") add
+        button(data-role="get") get
+        button(data-role="remove") remove
+        span q id
+        select#qId
+    section.idrev
+        label
+            span _id
+            input(readonly=true val=theid)
+        label
+            span _rev
+            input(readonly=true val=therev)
+
+    section.panel
+        ul#qUL
+        each letter in letterArr
+            li(data-letter=letter) 
+                span= letter 
+                input(type=text) 
+                span ans
+                input(type=text) 
+    section.konsole
+        pre
+            code.language-javascript
+
+script(src="admin.js")
+    

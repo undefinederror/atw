@@ -12,7 +12,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>0bc6bc04-587b-4840-95a7-69ee063c7a8c</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>app.js</StartupFile>
+    <StartupFile>lib\pouchLayer.js</StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
     <SearchPath>
     </SearchPath>
@@ -31,8 +31,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="atw\public\javascripts\prism.js" />
+    <Compile Include="lib\pouchLayer.js" />
+    <Content Include="atw\public\favicon.ico" />
+    <Content Include="atw\public\stylesheets\admin.less" />
+    <Content Include="atw\public\stylesheets\prism.css" />
+    <Content Include="atw\views\admin.jade" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="atw\" />
+    <Folder Include="atw\public\" />
+    <Folder Include="atw\public\stylesheets\" />
+    <Folder Include="atw\views\" />
+    <Folder Include="lib\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

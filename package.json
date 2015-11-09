@@ -8,6 +8,8 @@
     "email": ""
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "pouchdb": "^5.1.0",
+    "q": "^1.4.1"
   }
 }
