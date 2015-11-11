@@ -4,42 +4,65 @@
 	var
 		letterArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'z'],
         req = { name: 'questions', args: {} },
-        $qId=$('#qId'),
-        $questionLi = $('#qUL >li'),
-        $konsole = $('section.konsole pre code')
+        $qIdSelect = $('#qIdSelect'),
+        $questionLi = $('#qAndAns >li'),
+        $konsole = $('section.konsole pre code'),
+        $btnAction=$('button[data-action]')
 
 
 	;
     
     // binds
-    $qId.on('change', function () {
-        var id = $(this).val();
-        queryDB({method:'get',args: id})
-         .then(function (res) {
-            konsole(res);
-            populate(res);
-            //var arrIds = res.rows.map(function (item) {
-            //    return item.id
-            //}).sort(function (a, b) {
-            //    return (a | 0) - (b | 0)
-            //});
-            //populateIdDrop(arrIds);
+    $qIdSelect.on('click', 'li', function () {
+        getId($(this).text(), true)
+    });
 
+    $btnAction.on('click', function () {
+        var action = $(this).attr('data-action'), dbAction= action, obj = {};
+        switch (action) {
+            case 'put':
+            case 'remove':
+                obj = makeObj();
+                break;
+            case 'new':
+                obj: { };
+                dbAction = 'put';
+                break;
+        }
+        
+        queryDB({ method: dbAction, args: obj })
+        .then(function (res) {
+            konsole(res);
+            if (action !== 'put') { getIds(false) }
+            if (action === 'new') { getId(res.id,false) }
         })
-        .fail(function (err) { konsole(err) })
+        .fail(onFail)
         ;
+    });
+
     
-    
-    })
+
     init();
     
     
     // fn
     function makeObj() { 
-       
-    
-    
+        var obj = {},
+            $elems = $('[data-db]')
+        ;
+        $.each($elems, function () { 
+            _.set(obj, $(this).attr('data-db'), $(this).val());
+        });
+        return obj;
     }
+
+    function populate(obj) {
+        var $elems = $('[data-db]');
+        $.each($elems, function () {
+            $(this).val(_.get(obj, $(this).attr('data-db'), null));
+        });
+    }
+
     function queryDB(conf) { 
         return $.ajax({
             type: 'POST',
@@ -47,12 +70,12 @@
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify($.extend({}, req, conf ))
         })
-    
     }
-    function getIds() {
+
+    function getIds(verbose) {
         queryDB({ method: 'allDocs' })
         .then(function (res) {
-            konsole(res);
+            verbose && konsole(res);
             var arrIds = res.rows.map(function (item) {
                 return item.id
             }).sort(function (a, b) {
@@ -61,8 +84,22 @@
             populateIdDrop(arrIds);
 
         })
-        .fail(function (err) {konsole(err) })
+        .fail(onFail)
         ;
+    }
+
+    function getId(id, verbose) {
+        queryDB({ method: 'get', args: id })
+         .then(function (res) {
+            verbose && konsole(res);
+            populate(res);
+        })
+        .fail(onFail)
+        ;
+    }
+
+    function blank() { 
+        populate({});
     }
     function konsole(txt) {
         var out = txt;
@@ -71,24 +108,17 @@
         Prism.highlightAll();
     }
     function populateIdDrop(arr) {
-        arr.unshift('choose id');
-        var out = '', opt = '<option value="[[id]]">[[id]]</option>';
+        var out = '', opt = '<li><a href="javascript:;">[[id]]</a></li>';
         $.each(arr, function (idx,id) { 
             out += opt.replace(/\[\[id\]\]/g, id);
         })
-        $qId.html(out);
+        $qIdSelect.html(out);
     }
     
-    function populate(obj) {
-        for (var p in obj) { 
-            $('input[data-db=' + p + ']').val(obj[p]);
-        }
-    }
+    function onFail(err) { konsole(err) }
     
     function init() { 
-        getIds();
-    
-    
+        getIds(true);
     }
 
     

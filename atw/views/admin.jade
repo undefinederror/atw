@@ -8,32 +8,41 @@ head
     link(rel="stylesheet" type="text/css" href="admin.css")
     link(rel="stylesheet" type="text/css" href="prism.css")
     script(src="https://code.jquery.com/jquery-latest.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
     script(src="bootstrap.min.js")
     script(src="prism.js" data-manual)
 body
-    nav
-    section.buttons
-        button(data-role="create") add
-        button(data-role="get") get
-        button(data-role="remove") remove
-        span q id
-        select#qId
+    nav.navbar.navbar-inverse.navbar-fixed-top
+        section.buttons.container-fluid
+            div.btn-group
+                button(data-action="new").btn.btn-primary new
+                //button(data-action="refresh") refresh
+                button(data-action="put").btn.btn-success update
+                button(data-action="remove").btn.btn-danger delete
+                div.btn-group
+                    button.btn.btn-default.dropdown-toggle#dropId(data-toggle="dropdown" aria-haspopup="true")
+                        |Question Ids 
+                        span.caret
+                    ul.dropdown-menu#qIdSelect(aria-labelledby="dropId")
     section.idrev
         label
             span  _id
-            input(data-db="_id" readonly=true val=theid)
+            input(data-db="_id" readonly="true" val="theid")
         label
             span _rev
-            input(data-db="_rev" readonly=true val=therev)
-
+            input(data-db="_rev" readonly="true" val="therev")
+    section.cat
+        label
+            span cat
+            input(data-db="cat")
     section.panel
-        ul#qUL
+        ul#qAndAns
         each letter in letterArr
-            li(data-letter=letter) 
+            li(data-ref="letter." + letter) 
                 span= letter 
-                input(type=text) 
+                input(data-db="letter." + letter + ".q" type=text) 
                 span ans
-                input(type=text) 
+                input(data-db="letter." + letter + ".a" type=text) 
     section.konsole
         pre
             code.language-javascript
