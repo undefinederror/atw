@@ -7,7 +7,8 @@
         $qIdSelect = $('#qIdSelect'),
         $questionLi = $('#qAndAns >li'),
         $konsole = $('section.konsole pre code'),
-        $btnAction=$('button[data-action]')
+        $btnAction = $('button[data-action]'),
+        $nRecs=$('#nRecs')
 
 
 	;
@@ -82,6 +83,7 @@
                 return (a | 0) - (b | 0)
             });
             populateIdDrop(arrIds);
+            updateRecNum(arrIds.length);
 
         })
         .fail(onFail)
@@ -113,6 +115,9 @@
             out += opt.replace(/\[\[id\]\]/g, id);
         })
         $qIdSelect.html(out);
+    }
+    function updateRecNum(n) { 
+        $nRecs.text(n);
     }
     
     function onFail(err) { konsole(err) }

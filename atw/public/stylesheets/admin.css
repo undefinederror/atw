@@ -4,7 +4,7 @@
   font-size: 16px;
 }
 .konsole {
-  width: 800px;
+  /*width: 500px;*/
 }
 .konsole code[class*="language-"] {
   -ms-word-wrap: break-word;

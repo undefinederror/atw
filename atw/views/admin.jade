@@ -11,41 +11,51 @@ head
     script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
     script(src="bootstrap.min.js")
     script(src="prism.js" data-manual)
-body
-    nav.navbar.navbar-inverse.navbar-fixed-top
-        section.buttons.container-fluid
-            div.btn-group
-                button(data-action="new").btn.btn-primary new
-                //button(data-action="refresh") refresh
-                button(data-action="put").btn.btn-success update
-                button(data-action="remove").btn.btn-danger delete
-                div.btn-group
-                    button.btn.btn-default.dropdown-toggle#dropId(data-toggle="dropdown" aria-haspopup="true")
-                        |Question Ids 
-                        span.caret
-                    ul.dropdown-menu#qIdSelect(aria-labelledby="dropId")
-    section.idrev
-        label
-            span  _id
-            input(data-db="_id" readonly="true" val="theid")
-        label
-            span _rev
-            input(data-db="_rev" readonly="true" val="therev")
-    section.cat
-        label
-            span cat
-            input(data-db="cat")
-    section.panel
-        ul#qAndAns
-        each letter in letterArr
-            li(data-ref="letter." + letter) 
-                span= letter 
-                input(data-db="letter." + letter + ".q" type=text) 
-                span ans
-                input(data-db="letter." + letter + ".a" type=text) 
-    section.konsole
-        pre
-            code.language-javascript
+body.container.container-fluid
+    header.navbar.navbar-inverse.navbar-fixed-top
+        div.row
+            div.col-md-3
+            div.col-md-6
+                section.buttons.container-fluid
+                    div.btn-group
+                        button(data-action="new").btn.btn-primary new
+                        //button(data-action="refresh") refresh
+                        button(data-action="put").btn.btn-success update
+                        button(data-action="remove").btn.btn-danger delete
+                        div.btn-group
+                            button.btn.btn-default.dropdown-toggle#dropId(data-toggle="dropdown" aria-haspopup="true")
+                                |Question Ids 
+                                span.caret
+                            ul.dropdown-menu#qIdSelect(aria-labelledby="dropId")
+                    span.label.label-info tot records 
+                            span#nRecs.badge.badge-success 4
+
+    section.main.row
+        div.col-md-3
+        div.col-md-6
+            section.idrev
+                label
+                    span  _id
+                    input(data-db="_id" readonly="true" val="theid")
+                label
+                    span _rev
+                    input(data-db="_rev" readonly="true" val="therev")
+            section.cat
+                label
+                    span cat
+                    input(data-db="cat")
+            section.panel
+                ul#qAndAns
+                each letter in letterArr
+                    li(data-ref="letter." + letter) 
+                        span= letter 
+                        input(data-db="letter." + letter + ".q" type=text) 
+                        span ans
+                        input(data-db="letter." + letter + ".a" type=text) 
+        div.col-md-3
+            section.konsole
+                pre
+                    code.language-javascript
 
 script(src="admin.js")
     
