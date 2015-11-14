@@ -1,61 +1,67 @@
-﻿- var letterArr=['a','b','c','d','e','f','g','h','i','l','m','n','o','p','q','r','s','t','u','v','z']
+﻿extend layout
 
-doctype html
-html
-head
-    title Around the Admin
-    link(rel="stylesheet" type="text/css" href="bootstrap.css")
+block vars
+    -var letterArr=['a','b','c','d','e','f','g','h','i','l','m','n','o','p','q','r','s','t','u','v','z'];
+    -var title = 'AroundTheAdmin';
+
+block append css
     link(rel="stylesheet" type="text/css" href="admin.css")
     link(rel="stylesheet" type="text/css" href="prism.css")
-    script(src="https://code.jquery.com/jquery-latest.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
-    script(src="bootstrap.min.js")
+
+block append js
     script(src="prism.js" data-manual)
-body.container.container-fluid
-    header.navbar.navbar-inverse.navbar-fixed-top
-        div.row
-            div.col-md-3
-            div.col-md-6
-                section.buttons.container-fluid
-                    div.btn-group
-                        button(data-action="new").btn.btn-primary new
-                        //button(data-action="refresh") refresh
-                        button(data-action="put").btn.btn-success update
-                        button(data-action="remove").btn.btn-danger delete
-                        div.btn-group
-                            button.btn.btn-default.dropdown-toggle#dropId(data-toggle="dropdown" aria-haspopup="true")
-                                |Question Ids 
-                                span.caret
-                            ul.dropdown-menu#qIdSelect(aria-labelledby="dropId")
-                    span.label.label-info tot records 
-                            span#nRecs.badge.badge-success 4
 
-    section.main.row
-        div.col-md-3
-        div.col-md-6
-            section.idrev
-                label
-                    span  _id
-                    input(data-db="_id" readonly="true" val="theid")
-                label
-                    span _rev
-                    input(data-db="_rev" readonly="true" val="therev")
-            section.cat
-                label
-                    span cat
-                    input(data-db="cat")
-            section.panel
-                ul#qAndAns
+block content
+    body.container
+        header.navbar.navbar-inverse.navbar-fixed-top.text-center
+            div.center-block
+                div.btn-group.btn-lg
+                    button(data-action="new").btn.btn-primary new
+                    button(data-action="put").btn.btn-success update
+                    button(data-action="remove").btn.btn-danger delete
+                div.btn-group.btn-lg
+                    button.btn.btn-default.dropdown-toggle#dropId(data-toggle="dropdown", aria-haspopup="true")
+                        |Question Ids 
+                        span.caret
+                    ul.dropdown-menu#qIdSelect(aria-labelledby="dropId")
+                mark tot records 
+                    span#nRecs.badge.badge-success 4
+
+        section.main.row
+            div.col-md-9.text-center
+                div.center-block
+                    div.row
+                        div.form-group.col-md-2
+                            div.input-group.col-md-12
+                                div.input-group-addon  _id
+                                input.form-control(data-db="_id", readonly="true", value="theid")
+                        div.form-group.col-md-6
+                            div.input-group.col-md-12
+                                div.input-group-addon _rev
+                                input.form-control(data-db="_rev", readonly="true", value="therev")
+                        div.form-group.col-md-4
+                            div.input-group.col-md-12
+                                div.input-group-addon cat
+                                input.form-control(data-db="cat", placeholder="category")
+                
                 each letter in letterArr
-                    li(data-ref="letter." + letter) 
-                        span= letter 
-                        input(data-db="letter." + letter + ".q" type=text) 
-                        span ans
-                        input(data-db="letter." + letter + ".a" type=text) 
-        div.col-md-3
-            section.konsole
-                pre
-                    code.language-javascript
+                    div.row
+                        div.form-group.col-md-1
+                            div.input-group.col-md-12
+                                span.badge(style="font-size:30px")=letter
+                        div.form-group.col-md-7
+                            div.input-group.col-md-12
+                                div.input-group-addon q
+                                input.form-control(data-db="letter." + letter + ".q", type=text)
+                        div.form-group.col-md-4
+                            div.input-group.col-md-12
+                                div.input-group-addon a
+                                input.form-control(data-db="letter." + letter + ".a", type=text, placeholder=letter+"...")
+            div.col-md-3
+                section.konsole.affix
+                    pre
+                        code.language-javascript
 
-script(src="admin.js")
-    
+    script(src="admin.js")
+
+block footer

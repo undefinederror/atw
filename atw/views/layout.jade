@@ -1,7 +1,19 @@
+block vars
+
+block mixins
+
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+    head
+        title=title
+        block css
+            link(rel="stylesheet" type="text/css" href="bootstrap.css")
+        block js
+            script(src="https://code.jquery.com/jquery-latest.min.js")
+            script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
+            script(src="bootstrap.min.js")
+    
     block content
+    block footer
+        hr
+        footer @AroundTheWord

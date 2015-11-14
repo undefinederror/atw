@@ -1,5 +1,36 @@
 extends layout
 
+block vars
+    -var title='AroundTheWord';
+
+block mixins
+    mixin panel(i,j)
+        - for(;i-->0;){    
+        div.panel.panel-success.margin-top-20
+            div.panel-heading Panel #{i}
+            div.panel-body="Some content"
+            div.panel-footer.clearfix
+                - for(var jj=j;jj-->0;){    
+                div.col-md-4 content #{jj}
+                - }
+        - }
+
+block append css
+    link(rel="stylesheet", type="text/css", href="circle.css")
+
+block append js
+    script(src="Letter.js")
+
 block content
-  h1= title
-  p Welcome to #{title}
+    body.container
+        div.row
+            div.col-md-3
+                +panel(4,3)
+            div.col-md-9
+                div#circleContainer
+                    div#questionContainer
+                        div.question 
+                            button.btn.btn-primary start challenge
+                        input.form-control.ans(type="text")
+
+    script(src="main.js")

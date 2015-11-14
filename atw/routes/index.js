@@ -18,7 +18,7 @@ router.get(/\/(.*)/, function (req, res, next) {
         ext = reqPath.match(/(?:\w|\d(?!\.))*$/).toString() || 'html'
     ;
     if (ext === 'jade') { 
-        res.render(path.join(folderRoutes[ext], reqPath));
+        res.render(path.join(folderRoutes[ext], reqPath), {title:'atw'});
     } else {
         res.sendFile(path.join(folderRoutes[ext], reqPath));
     }

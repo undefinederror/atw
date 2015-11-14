@@ -5,7 +5,6 @@
 		letterArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'z'],
         req = { name: 'questions', args: {} },
         $qIdSelect = $('#qIdSelect'),
-        $questionLi = $('#qAndAns >li'),
         $konsole = $('section.konsole pre code'),
         $btnAction = $('button[data-action]'),
         $nRecs=$('#nRecs')

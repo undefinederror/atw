@@ -1,10 +1,9 @@
 ﻿body {
-  padding-top: 70px;
+  padding-top: 100px;
   font-family: Consolas;
-  font-size: 16px;
 }
 .konsole {
-  /*width: 500px;*/
+  width: 350px;
 }
 .konsole code[class*="language-"] {
   -ms-word-wrap: break-word;
