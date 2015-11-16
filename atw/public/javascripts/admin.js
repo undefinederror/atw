@@ -3,7 +3,6 @@
 	
 	var
 		letterArr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'z'],
-        req = { name: 'questions', args: {} },
         $qIdSelect = $('#qIdSelect'),
         $konsole = $('section.konsole pre code'),
         $btnAction = $('button[data-action]'),
@@ -30,7 +29,7 @@
                 break;
         }
         
-        queryDB({ method: dbAction, args: obj })
+        atw.db.q({ method: dbAction, args: obj })
         .then(function (res) {
             konsole(res);
             if (action !== 'put') { getIds(false) }
@@ -50,7 +49,7 @@
         var obj = {},
             $elems = $('[data-db]')
         ;
-        $.each($elems, function () { 
+        $.each($elems, function () {
             _.set(obj, $(this).attr('data-db'), $(this).val());
         });
         return obj;
@@ -63,34 +62,22 @@
         });
     }
 
-    function queryDB(conf) { 
-        return $.ajax({
-            type: 'POST',
-            url: '/yo.serv', 
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify($.extend({}, req, conf ))
-        })
-    }
+    
 
     function getIds(verbose) {
-        queryDB({ method: 'allDocs' })
+        atw.db.q({ method: 'getIds',args: {limit:null} })
         .then(function (res) {
             verbose && konsole(res);
-            var arrIds = res.rows.map(function (item) {
-                return item.id
-            }).sort(function (a, b) {
-                return (a | 0) - (b | 0)
-            });
+            var arrIds = _.pluck(res.docs, 'n').reverse()
             populateIdDrop(arrIds);
             updateRecNum(arrIds.length);
-
         })
         .fail(onFail)
         ;
     }
 
     function getId(id, verbose) {
-        queryDB({ method: 'get', args: id })
+        atw.db.q({ method: 'get', args: id })
          .then(function (res) {
             verbose && konsole(res);
             populate(res);

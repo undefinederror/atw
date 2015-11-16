@@ -1,13 +1,28 @@
 (function(){
 	'use strict';
-	
+    // var
+    window.atw = window.atw || {};
+    atw.letterObj = {};
+
 	var
 		letterArr=['a','b','c','d','e','f','g','h','i','l','m','n','o','p','q','r','s','t','u','v','z'],
-		letterObj={},
-		$parent=$('#circleContainer'),
+        $parent = $('#circleContainer'),
+        $qContainer=$parent.find('#questionContainer'),
+        $qText= $qContainer.find('.question'),
 		animComplete=$.Deferred()
 	;
-	
+
+    // bind
+    animComplete.promise().done(function () {
+        $qContainer.delay(800).fadeIn()
+		.promise().done(postAnim);
+    });
+    
+    // init
+    init();
+    
+    // fn
+    // # anim
 	function positionLetters(){
 		var
 			n=0,
@@ -36,23 +51,65 @@
 				animComplete.resolve();
 			}
 		}
-		$.each(letterObj,function(prop,letter){
+		$.each(atw.letterObj,function(prop,letter){
 			setTimeout(position.bind(null,letter,n),n*delay+(n%2*delay*5));
 			n++;
 		});
-	}
-	$.each(letterArr,function(idx,val){
-		letterObj[val]=new Letter(val,$parent);
-	});
-	positionLetters();
-	animComplete.done(function(){
-		$('#questionContainer').delay(800).fadeIn()
-		.promise().done(postAnim);
-	});
-	
-	function postAnim() {
-		letterObj.a.setState(Letter.prototype.states.CURRENT);
-	}
-	window.letterObj=letterObj;
+    }
+
+    function postAnim() {
+        atw.letterObj.a.setState(Letter.prototype.states.CURRENT);
+    }
+    
+    // # challenge
+    function getQ(letter) { 
+        var d = $.Deferred();
+        atw.db.q({
+            "name": "questions",
+            "method": "find",
+            "args": {
+                "selector": {
+                    "_id": "0"
+                },
+                "fields": ["letter"]
+            }
+        })
+        .then(function (res) {
+            d.resolve(res.doc[0].letter[letter].q);
+        })
+        .fail();
+        return d.promise();
+    }
+    function checkA(args) { 
+        
+    
+    }
+    
+    function renderQ(letter) {
+        clockPause();
+        getQ(letter)
+        .then(function (res) {
+            $qText.text(res);
+        })
+        .fail();
+        clockStart();
+
+    }
+    
+    function clockStart() { 
+    
+    
+    }
+    
+    function clockPause() { 
+    
+    
+    }
+    function init(){ 
+        $.each(letterArr, function (idx, val) {
+            atw.letterObj[val] = new Letter(val, $parent);
+        });
+        positionLetters();
+    }
 	
 })();

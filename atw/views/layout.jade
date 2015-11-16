@@ -12,8 +12,10 @@ html
             script(src="https://code.jquery.com/jquery-latest.min.js")
             script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
             script(src="bootstrap.min.js")
+            script(src="dbClient.js")
     
     block content
     block footer
-        hr
-        footer @AroundTheWord
+        nav.navbar.navbar-inverse.navbar-fixed-bottom
+            div.container 
+                p.navbar-text.navbar-left @AroundTheWord

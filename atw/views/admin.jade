@@ -21,7 +21,7 @@ block content
                     button(data-action="remove").btn.btn-danger delete
                 div.btn-group.btn-lg
                     button.btn.btn-default.dropdown-toggle#dropId(data-toggle="dropdown", aria-haspopup="true")
-                        |Question Ids 
+                        |Ids 
                         span.caret
                     ul.dropdown-menu#qIdSelect(aria-labelledby="dropId")
                 mark tot records 
@@ -35,6 +35,7 @@ block content
                             div.input-group.col-md-12
                                 div.input-group-addon  _id
                                 input.form-control(data-db="_id", readonly="true", value="theid")
+                                input.hidden(data-db="n", type="number")
                         div.form-group.col-md-6
                             div.input-group.col-md-12
                                 div.input-group-addon _rev

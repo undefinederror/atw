@@ -30,7 +30,10 @@ block content
                 div#circleContainer
                     div#questionContainer
                         div.question 
-                            button.btn.btn-primary start challenge
+                            
                         input.form-control.ans(type="text")
+                        div.btnContainer
+                            button.btn.btn-primary(data-ation="start") start challenge
+                            button.btn.btn-warning(data-ation="pass") pass
 
     script(src="main.js")
