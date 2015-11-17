@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="atw\public\javascripts\dbClient.js" />
+    <Compile Include="atw\public\javascripts\Letters.js" />
     <Compile Include="atw\public\javascripts\prism.js" />
     <Compile Include="lib\pouchLayer.js" />
     <Content Include="atw\public\favicon.ico" />

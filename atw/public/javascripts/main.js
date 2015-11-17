@@ -2,7 +2,6 @@
 	'use strict';
     // var
     window.atw = window.atw || {};
-    atw.letterObj = {};
 
 	var
 		letterArr=['a','b','c','d','e','f','g','h','i','l','m','n','o','p','q','r','s','t','u','v','z'],
@@ -51,14 +50,14 @@
 				animComplete.resolve();
 			}
 		}
-		$.each(atw.letterObj,function(prop,letter){
+		$.each(atw.Letters().getVal(),function(prop,letter){
 			setTimeout(position.bind(null,letter,n),n*delay+(n%2*delay*5));
 			n++;
 		});
     }
 
     function postAnim() {
-        atw.letterObj.a.setState(Letter.prototype.states.CURRENT);
+        atw.Letters().getVal('a').setCurrent();
     }
     
     // # challenge
@@ -107,7 +106,7 @@
     }
     function init(){ 
         $.each(letterArr, function (idx, val) {
-            atw.letterObj[val] = new Letter(val, $parent);
+            atw.Letters($parent).create(val);
         });
         positionLetters();
     }

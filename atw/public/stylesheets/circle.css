@@ -68,3 +68,10 @@
     left: 10%;
 }
 #circleContainer #questionContainer .ans:focus{border:none;outline:none;}
+
+#circleContainer #questionContainer .btnContainer {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    text-align: center;
+}
