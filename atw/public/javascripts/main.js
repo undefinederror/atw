@@ -40,8 +40,12 @@
     });
     $ans.on('keyup', function (e) {
         if (e.which === 13) {
+            // return
             var current = atw.Letters().getCurrent();
             current.$elem.trigger('answer', { letter: current.value, a: $(this).val().trim() });
+        } else if (e.which === 32) {
+            // spacebar
+            $pass.trigger('click');
         }
     });
     // init
@@ -128,6 +132,7 @@
             } else {
                 atw.Letters().getCurrent().setState(atw.Letter.prototype.states.WRONG);
             }
+            clearAns();
             atw.Letters().getNext().setCurrent();
         })
         .fail();
@@ -142,6 +147,10 @@
         .fail();
         clockStart();
 
+}
+
+    function clearAns() { 
+        $ans.focus().val('');
     }
     
     function clockStart() { 

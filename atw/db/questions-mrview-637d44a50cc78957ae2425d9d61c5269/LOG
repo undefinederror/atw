@@ -1,1 +1,5 @@
-2015/11/18-03:48:42.278 21d0 Delete type=3 #1
+2015/11/18-04:43:15.439 26ec Recovering log #3
+2015/11/18-04:43:15.451 26ec Level-0 table #5: started
+2015/11/18-04:43:15.453 26ec Level-0 table #5: 1640 bytes OK
+2015/11/18-04:43:15.455 26ec Delete type=0 #3
+2015/11/18-04:43:15.456 26ec Delete type=3 #2
