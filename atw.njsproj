@@ -36,6 +36,9 @@
     <Compile Include="atw\public\javascripts\prism.js" />
     <Compile Include="lib\pouchLayer.js" />
     <Content Include="atw\public\favicon.ico" />
+    <Content Include="atw\public\images\dead_horse.jpg" />
+    <Content Include="atw\public\images\nope.jpg" />
+    <Content Include="atw\public\images\nope.jpg" />
     <Content Include="atw\public\stylesheets\admin.less" />
     <Content Include="atw\public\stylesheets\prism.css" />
     <Content Include="atw\views\admin.jade" />
@@ -45,6 +48,7 @@
   <ItemGroup>
     <Folder Include="atw\" />
     <Folder Include="atw\public\" />
+    <Folder Include="atw\public\images\" />
     <Folder Include="atw\public\javascripts\" />
     <Folder Include="atw\public\stylesheets\" />
     <Folder Include="atw\views\" />

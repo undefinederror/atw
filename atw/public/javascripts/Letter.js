@@ -31,12 +31,11 @@
                 }).join(' '),
                 active= atw.Letters().getState(this.states.CURRENT)
 			;
-            this.state = state;
-            this.$elem.removeClass(klass).addClass(state);
-            if (active.length && !_.isEqual(active[0],this)) {
+            if (active.length && !_.isEqual(active[0], this)) {
                 active[0].setState(this.states.INIT);
             }
-            
+            this.state = state;
+            this.$elem.removeClass(klass).addClass(state).trigger(state, this);
         },
         setCurrent: function () {
             this.setState(this.states.CURRENT);

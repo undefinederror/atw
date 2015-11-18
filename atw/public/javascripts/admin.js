@@ -32,8 +32,21 @@
         atw.db.q({ method: dbAction, args: obj })
         .then(function (res) {
             konsole(res);
-            if (action !== 'put') { getIds(false) }
-            if (action === 'new') { getId(res.id,false) }
+            switch (action) {
+                case 'put':
+                    getId(res.id, false);
+                    getIds(false);
+                    break;
+                case 'remove':
+                    getIds(false);
+                    ghostRev();
+                    break;
+                case 'new':
+                    getId(res.id, false);
+                    getIds(false);
+                    break;
+            }
+            
         })
         .fail(onFail)
         ;
@@ -62,8 +75,6 @@
         });
     }
 
-    
-
     function getIds(verbose) {
         atw.db.q({ method: 'getIds',args: {limit:null} })
         .then(function (res) {
@@ -88,6 +99,10 @@
 
     function blank() { 
         populate({});
+    }
+    function ghostRev() {
+        var r = $('[data-db=_rev]').val();
+        $('[data-db=_rev]').attr('placeholder', r).val('');
     }
     function konsole(txt) {
         var out = txt;

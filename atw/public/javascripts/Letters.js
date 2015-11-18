@@ -17,10 +17,13 @@
         getState: function (state) {
             return _.filter(arrLetters,{state:state});
         },
+        getCurrent: function () {
+            return _.find(arrLetters,{state: atw.Letter.prototype.states.CURRENT});
+        },
         getNext: function () { 
-            return _.find(_.takeRightWhile(arrLetters, function (letter){
+            return _.find(_.takeRightWhile(arrLetters, function (letter) {
                 return letter.state !== atw.Letter.prototype.states.CURRENT
-            }), {state:atw.Letter.prototype.states.INIT})
+            }).concat(arrLetters), { state: atw.Letter.prototype.states.INIT });
         }
 
     }
