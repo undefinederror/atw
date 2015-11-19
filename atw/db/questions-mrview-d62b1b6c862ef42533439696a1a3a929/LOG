@@ -1,5 +1,5 @@
-2015/11/18-04:42:55.995 26ec Recovering log #6
-2015/11/18-04:42:55.995 26ec Level-0 table #8: started
-2015/11/18-04:42:55.996 26ec Level-0 table #8: 237 bytes OK
-2015/11/18-04:42:55.999 26ec Delete type=0 #6
-2015/11/18-04:42:55.999 26ec Delete type=3 #4
+2015/11/19-09:00:35.623 2010 Recovering log #9
+2015/11/19-09:00:35.623 2010 Level-0 table #11: started
+2015/11/19-09:00:35.625 2010 Level-0 table #11: 237 bytes OK
+2015/11/19-09:00:35.628 2010 Delete type=0 #9
+2015/11/19-09:00:35.628 2010 Delete type=3 #7

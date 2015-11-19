@@ -12,44 +12,13 @@
         $qText = $qContainer.find('.question'),
         $ans = $qContainer.find('.ans'),
         animComplete = $.Deferred(),
-        challenge= {state:'paused'}
+        challenge = { state: 'paused' },
+        KEYCODES = {ANS:13, PASS:32 }
 	;
 
-    // bind
-    animComplete.promise().done(function () {
-        $qContainer.delay(800).fadeIn()
-		.promise().done(postAnim);
-    });
-    $pass.on('click', function () { atw.Letters().getNext().setCurrent() });
-    $start.on('click', function () {
-        $(this).fadeOut().promise().done(function () {
-            $pass.fadeIn();
-            clockStart();
-            atw.Letters().getCurrent().setCurrent();
-        })
-    });
-    $parent.on('current', '.letter', function (e, letter) {
-        if (challenge.state === 'running') {
-            renderQ(letter.value);
-        }
-    });
-    $parent.on('answer', '.letter', function (e, data) {
-        if (challenge.state === 'running') {
-            checkA({ letter: data.letter, a: data.a });
-        }
-    });
-    $ans.on('keyup', function (e) {
-        if (e.which === 13) {
-            // return
-            var current = atw.Letters().getCurrent();
-            current.$elem.trigger('answer', { letter: current.value, a: $(this).val().trim() });
-        } else if (e.which === 32) {
-            // spacebar
-            $pass.trigger('click');
-        }
-    });
-    // init
+   
 
+    binds();
     init();
     
     // fn
@@ -112,16 +81,13 @@
         return d.promise();
     }
     function checkA(args) {
-        //var sel = {'_id':'0'};
-        //sel["letter." + letter + ".a"] = ans; 
+        var sel = {'_id':'0'};
+        sel["letter." + args.letter + ".a"] = args.a; 
         atw.db.q({
             "name": "questions",
             "method": "find",
             "args": {
-                "selector": {
-                    "_id": "0",
-                    [ "letter." + args.letter + ".a"]:args.a
-                },
+                "selector": sel,
                 "fields": ["_id"]
             }
 
@@ -132,7 +98,6 @@
             } else {
                 atw.Letters().getCurrent().setState(atw.Letter.prototype.states.WRONG);
             }
-            clearAns();
             atw.Letters().getNext().setCurrent();
         })
         .fail();
@@ -145,9 +110,9 @@
             $qText.text(res);
         })
         .fail();
+        clearAns();
         clockStart();
-
-}
+    }
 
     function clearAns() { 
         $ans.focus().val('');
@@ -155,7 +120,6 @@
     
     function clockStart() { 
         challenge.state = 'running';
-    
     }
     
     function clockPause() { 
@@ -169,4 +133,38 @@
         positionLetters();
     }
 	
+    function binds() { 
+        animComplete.promise().done(function () {
+            $qContainer.delay(800).fadeIn()
+		    .promise().done(postAnim);
+        });
+        $pass.on('click', function () { atw.Letters().getNext().setCurrent() });
+        $start.on('click', function () {
+            $(this).fadeOut().promise().done(function () {
+                $pass.fadeIn();
+                clockStart();
+                atw.Letters().getCurrent().setCurrent();
+            })
+        });
+        $parent.on('current', '.letter', function (e, letter) {
+            if (challenge.state === 'running') {
+                renderQ(letter.value);
+            }
+        });
+        $parent.on('answer', '.letter', function (e, data) {
+            if (challenge.state === 'running') {
+                checkA(data);
+            }
+        });
+        $ans.on('keyup', function (e) {
+            if (challenge.state === 'running') {
+                if (e.which === KEYCODES.ANS) {
+                    var current = atw.Letters().getCurrent();
+                    current.$elem.trigger('answer', { letter: current.value, a: $(this).val().trim() });
+                } else if (e.which === KEYCODES.PASS) {
+                    $pass.trigger('click');
+                }
+            }
+        });
+    }
 })();

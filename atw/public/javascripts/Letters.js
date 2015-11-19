@@ -2,7 +2,7 @@
     'use strict';
     window.atw = window.atw || {};
     
-    var _parent, arrLetters = [];
+    var _parent, arrLetters = [], current;
     var methods = {
         create: function (letter) { 
             arrLetters.push(new atw.Letter(letter,_parent));
@@ -17,12 +17,15 @@
         getState: function (state) {
             return _.filter(arrLetters,{state:state});
         },
+        storeCurrent: function (letter) { 
+            current = letter;
+        },
         getCurrent: function () {
-            return _.find(arrLetters,{state: atw.Letter.prototype.states.CURRENT});
+            return current;
         },
         getNext: function () { 
             return _.find(_.takeRightWhile(arrLetters, function (letter) {
-                return letter.state !== atw.Letter.prototype.states.CURRENT
+                return !_.isEqual(letter,current)
             }).concat(arrLetters), { state: atw.Letter.prototype.states.INIT });
         }
 

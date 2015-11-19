@@ -39,6 +39,7 @@
         },
         setCurrent: function () {
             this.setState(this.states.CURRENT);
+            atw.Letters().storeCurrent(this);
         }
 	};
 	
