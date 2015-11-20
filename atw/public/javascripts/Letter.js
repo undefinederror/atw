@@ -2,8 +2,10 @@
 	'use strict';
     
     window.atw = window.atw || {};
+    
+    var tpl = '<div class="letter">[[l]]</div>',
 
-    var LetterProto =  {
+        LetterProto =  {
         states: {
             INIT: 'init',
             RIGHT: 'right',
@@ -12,16 +14,13 @@
         },
         coords: { top: '45%', left: '45%' },
         r: 50,
-        html: '<div class="letter">[[l]]</div>',
         createElement: function () {
-            var html = this.html.replace('[[l]]', this.value);
-            var $elem = $(html).addClass(this.state);
-            $elem
+            this.$elem = $(tpl.replace('[[l]]', this.value))
+                .addClass(this.state)
 				.css(this.coords)
 				.css({ height: this.r, width: this.r });
-            //.css('opacity',0.9);
-            this.parent.append($elem);
-            return $elem;
+            
+            this.parent.append(this.$elem);
         },
         setState: function (state) {
             var 
@@ -46,8 +45,8 @@
 	function Letter(val,parent){
 		this.parent=parent;
 		this.state=	this.states.INIT;
-		this.value=val;
-		this.$elem=this.createElement();
+        this.value = val;
+        this.createElement();
 	}
 	$.extend(Letter.prototype,Object.create(LetterProto));
 	
