@@ -35,6 +35,7 @@
     <Compile Include="atw\public\javascripts\Letters.js" />
     <Compile Include="atw\public\javascripts\prism.js" />
     <Compile Include="atw\public\javascripts\Stopwatch.js" />
+    <Compile Include="atw\public\javascripts\swWorker.js" />
     <Compile Include="lib\pouchLayer.js" />
     <Content Include="atw\public\favicon.ico" />
     <Content Include="atw\public\images\nope.jpg" />

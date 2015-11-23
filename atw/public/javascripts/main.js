@@ -13,13 +13,16 @@
         $ans = $qContainer.find('.ans'),
         animComplete = $.Deferred(),
         challenge = { state: 'paused' },
-        KEYCODES = {ANS:13, PASS:32 }
+        sw = new Worker('swWorker.js'),
+        KEYCODES = { ANS: 13, PASS: 32 }
+
 	;
 
    
 
     binds();
     init();
+    worker();
     
     // fn
     // # anim
@@ -166,5 +169,15 @@
                 }
             }
         });
+    }
+    function worker() { 
+        sw.addEventListener('message', function (e) {
+            console.log(e.data);
+        }, false);
+        sw.postMessage({ 
+            cdm: 'onTick', 
+            args: function () { self.postMessage(sw.time) }
+        });
+        sw.postMessage('start');
     }
 })();
