@@ -1,5 +1,5 @@
-2015/11/18-01:11:23.999 25dc Recovering log #48
-2015/11/18-01:11:23.999 25dc Level-0 table #50: started
-2015/11/18-01:11:24.000 25dc Level-0 table #50: 3296 bytes OK
-2015/11/18-01:11:24.002 25dc Delete type=0 #48
-2015/11/18-01:11:24.003 25dc Delete type=3 #46
+2015/11/24-00:43:23.128 2a2c Recovering log #54
+2015/11/24-00:43:23.128 2a2c Level-0 table #57: started
+2015/11/24-00:43:23.140 2a2c Level-0 table #57: 346 bytes OK
+2015/11/24-00:43:23.174 2a2c Delete type=0 #54
+2015/11/24-00:43:23.175 2a2c Delete type=3 #52

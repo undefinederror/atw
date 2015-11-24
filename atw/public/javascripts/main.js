@@ -11,14 +11,16 @@
         $start=$qContainer.find('[data-action=start]'),
         $qText = $qContainer.find('.question'),
         $ans = $qContainer.find('.ans'),
+        $sw = $('#sw'),
+        $cgState = $('#challengeState'),
         animComplete = $.Deferred(),
         challenge = { state: 'paused' },
-        sw = new Worker('swWorker.js'),
+        sW = new Worker('swWorker.js'),
         KEYCODES = { ANS: 13, PASS: 32 }
 
 	;
 
-   
+    window.swW = sW;
 
     binds();
     init();
@@ -114,21 +116,29 @@
         })
         .fail();
         clearAns();
-        clockStart();
+        clockResume();
     }
 
     function clearAns() { 
         $ans.focus().val('');
     }
     
-    function clockStart() { 
+    function clockStart() {
         challenge.state = 'running';
+        sW.postMessage({ cmd: 'start' });
+        
     }
     
-    function clockPause() { 
+    function clockPause() {
         challenge.state = 'paused';
+        sW.postMessage({ cmd: 'pause' });
     
     }
+    function clockResume() {
+        challenge.state = 'running';
+        sW.postMessage({ cmd: 'resume' });
+    }
+    
     function init(){ 
         $.each(letterArr, function (idx, val) {
             atw.Letters($parent).create(val);
@@ -170,14 +180,27 @@
             }
         });
     }
-    function worker() { 
-        sw.addEventListener('message', function (e) {
-            console.log(e.data);
+    function worker() {
+        sW.addEventListener('message', function (e) {
+            var data = e.data;
+            switch (data.cmd) {
+                case 'time':
+                    $sw.text(data.args);
+                    $cgState.text(challenge.state);
+                    break;
+                case 'complete':
+                    alert('too slow');
+                    break;
+            }
         }, false);
-        sw.postMessage({ 
-            cdm: 'onTick', 
-            args: function () { self.postMessage(sw.time) }
+        sW.postMessage({ 
+            cmd: 'onTick', 
+            args: "(function (){return function () { self.postMessage({ cmd: 'time', args: sw.time }) }})()"
         });
-        sw.postMessage('start');
+        sW.postMessage({
+            cmd: 'onComplete', 
+            args: "(function (){return function () { self.postMessage({ cmd: 'complete'}) }})()"
+        });
+        
     }
 })();
