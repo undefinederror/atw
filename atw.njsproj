@@ -12,7 +12,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>0bc6bc04-587b-4840-95a7-69ee063c7a8c</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>lib\pouchLayer.js</StartupFile>
+    <StartupFile>app.js</StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
     <SearchPath>
     </SearchPath>

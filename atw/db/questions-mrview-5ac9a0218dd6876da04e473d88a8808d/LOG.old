@@ -1,13 +1,5 @@
-2015/11/19-09:00:31.933 2f2c Recovering log #12
-2015/11/19-09:00:31.934 2f2c Level-0 table #14: started
-2015/11/19-09:00:31.935 2f2c Level-0 table #14: 237 bytes OK
-2015/11/19-09:00:31.937 2f2c Delete type=0 #12
-2015/11/19-09:00:31.938 2f2c Delete type=3 #10
-2015/11/19-09:00:31.938 28c8 Compacting 4@0 + 0@1 files
-2015/11/19-09:00:31.940 28c8 Generated table #16: 43 keys, 1457 bytes
-2015/11/19-09:00:31.940 28c8 Compacted 4@0 + 0@1 files => 1457 bytes
-2015/11/19-09:00:31.940 28c8 compacted to: files[ 0 1 0 0 0 0 0 ]
-2015/11/19-09:00:31.940 28c8 Delete type=2 #5
-2015/11/19-09:00:31.941 28c8 Delete type=2 #8
-2015/11/19-09:00:31.941 28c8 Delete type=2 #11
-2015/11/19-09:00:31.941 28c8 Delete type=2 #14
+2015/11/24-02:29:40.961 2f20 Recovering log #15
+2015/11/24-02:29:40.961 2f20 Level-0 table #18: started
+2015/11/24-02:29:40.962 2f20 Level-0 table #18: 247 bytes OK
+2015/11/24-02:29:40.965 2f20 Delete type=0 #15
+2015/11/24-02:29:40.965 2f20 Delete type=3 #13

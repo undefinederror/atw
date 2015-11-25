@@ -1,21 +1,6 @@
 ﻿var Stopwatch = (function () {
     // private contr fns
-    function secs2Time(secs) {
-        var hours = Math.floor(secs / (60 * 60)),
-            minutes = Math.floor(secs / 60),
-            seconds = Math.floor(secs % 60),
-            obj = {
-                "h": hours.toString().length === 1 ? '0' + hours : hours,
-                "m": minutes.toString().length === 1 ? '0' +
-                            minutes : minutes,
-                "s": seconds.toString().length === 1 ? '0' +
-                            seconds : seconds
-            };
-        return obj;
-    }
-    function formatTime(timeObj) {
-        return timeObj.h + ':' + timeObj.m + ':' + timeObj.s;
-    }
+    
     function extend(target,obj) {
         for (var p in obj) { 
             target[p] = obj[p];
@@ -23,7 +8,7 @@
         return target;
     }
 
-    function create(argTot, argTick) {
+    function create(argTot) {
         // args in millisenconds
         
         // private stuff
@@ -31,30 +16,37 @@
             t1 = 0,
             t2 = 0,
             tot = t = argTot,
-            tick = argTick,
-            tIntId = null,
+            tick,
+            tTickId = null,
+            tTotId=  null,
             cbacks = {},
             cbackHandler = function (cback, name) {
                 if (typeof cback === 'function') {
                     cbacks[name] = cback;
+                } else { 
+                    console.warn(name, ': callback is not a function');
                 }
             },
             calc = function () { t = tot - (t2 - t1); },
-            tIntFn = function () {
-                t2 = new Date().getTime();
-                calc();
-                if (cbacks.onTick) cbacks.onTick();
-                if (t <= 0) fnComplete();
-            },
-            fnComplete = function () {
-                pubMets.pause();
-                if (cbacks.onComplete) cbacks.onComplete();
-            },
             fnTick = function () {
                 if (cbacks.onTick) cbacks.onTick();
             },
-            tIntSet = function () {
-                tIntId = setInterval(tIntFn, tick);
+            tTickFn = function () {
+                t2 = new Date().getTime();
+                //calc();
+                if (cbacks.onTick) cbacks.onTick();
+            },
+            tTickSet = function () {
+                if(cbacks.onTick){
+                    tTickId = setInterval(tTickFn, tick);
+                }
+            },
+            fnComplete = function () {
+                pubMets.stop();
+                if (cbacks.onComplete) cbacks.onComplete();
+            },
+            tTotSet = function () {
+                tTotId = setTimeout(fnComplete, t);
             },
             validMets = {
                 start: true,
@@ -72,18 +64,19 @@
                 validMets.stop = true;
                 validMets.pause = true;
 
-                t = tot;
+                t = argTot;
                 t1 = new Date().getTime();
-                tIntSet();
+                tTotSet();
+                tTickSet();
             },
             pause: function () {
                 if (!validMets.pause) return false;
                 validMets.pause = false;
                 validMets.resume = true;
 
-                tIntId = clearTimeout(tIntId);
+                tTickId = clearInterval(tTickId);
+                tTotId = clearTimeout(tTotId);
                 t2 = new Date().getTime();
-                calc();
             },
             resume: function () {
                 if (!validMets.resume) return false;
@@ -92,19 +85,26 @@
 
                 tot = t;
                 t1 = new Date().getTime();
-                tIntSet();
+                tTickSet();
+                tTotSet();
             },
             stop: function () {
                 if (!validMets.stop) return false;
+                this.pause();
                 validMets.stop = false;
                 validMets.start = true;
                 validMets.pause = false;
                 validMets.resume = false;
-                
-                this.pause();
             },
-            onTick: function (cback) {
-                cbackHandler(cback, 'onTick');
+            onTick: function (cback, argTick) {
+                if (typeof argTick === 'number' && 
+                    argTick*1=== argTick &&
+                    argTick > 0) {
+                    tick = argTick;
+                    cbackHandler(cback, 'onTick');
+                } else {
+                    console.warn('onTick: argTick is not a positive integer')
+                }
             },
             onComplete: function (cback) {
                 cbackHandler(cback, 'onComplete');
@@ -114,7 +114,9 @@
             time: {
                 enumerable:true,
                 get: function () {
-                    return formatTime(secs2Time((t / 1000) | 0));
+                    calc();
+                    //return formatTime(secs2Time((t / 1000) | 0));
+                    return t;
                 },
                 set: function () {
                     console.warn('yeah right...');

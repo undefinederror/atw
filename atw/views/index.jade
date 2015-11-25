@@ -33,9 +33,27 @@ block content
                     div.panel-body
                         span#challengeState idle
                     div.panel-footer.clearfix.text-center
-                        h2.center-block.marg-0
-                            span.label.label-default#sw
-                +panel(3,3)
+                        h2#sw.center-block.marg-0
+                div#stats.panel.panel-success.margin-top-20
+                    div.panel-heading Stats 
+                        span.glyphicon.glyphicon-stats
+                    div.panel-body
+                        span
+                    div.panel-footer.clearfix.text-center
+                        div.col-md-4.pad-0 
+                            h4 
+                                label.label.label-success right 
+                            label.right 0
+                        div.col-md-4.pad-0 
+                            h4 
+                                label.label.label-danger wrong 
+                            label.wrong 0
+                        div.col-md-4.pad-0 
+                            h4
+                                label.label.label-warning pass 
+                            label.pass 0
+                            
+                +panel(2,3)
             div.col-md-9
                 div#circleContainer
                     div#questionContainer

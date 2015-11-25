@@ -11,6 +11,10 @@
         $start=$qContainer.find('[data-action=start]'),
         $qText = $qContainer.find('.question'),
         $ans = $qContainer.find('.ans'),
+        $stats = $('#stats'),
+        $statsR = $stats.find('.right'),
+        $statsW = $stats.find('.wrong'),
+        $statsP= $stats.find('.pass'),
         $sw = $('#sw'),
         $cgState = $('#challengeState'),
         animComplete = $.Deferred(),
@@ -86,6 +90,7 @@
         return d.promise();
     }
     function checkA(args) {
+        clockPause();
         var sel = {'_id':'0'};
         sel["letter." + args.letter + ".a"] = args.a; 
         atw.db.q({
@@ -103,7 +108,9 @@
             } else {
                 atw.Letters().getCurrent().setState(atw.Letter.prototype.states.WRONG);
             }
+            clockResume();
             atw.Letters().getNext().setCurrent();
+            
         })
         .fail();
     }
@@ -113,10 +120,10 @@
         getQ(letter)
         .then(function (res) {
             $qText.text(res);
+            clearAns();
+            clockResume();
         })
         .fail();
-        clearAns();
-        clockResume();
     }
 
     function clearAns() { 
@@ -126,7 +133,7 @@
     function clockStart() {
         challenge.state = 'running';
         sW.postMessage({ cmd: 'start' });
-        
+        sW.postMessage({ cmd: 'pause' });
     }
     
     function clockPause() {
@@ -138,7 +145,10 @@
         challenge.state = 'running';
         sW.postMessage({ cmd: 'resume' });
     }
-    
+    function clockStop() {
+        challenge.state = 'done';
+    }
+
     function init(){ 
         $.each(letterArr, function (idx, val) {
             atw.Letters($parent).create(val);
@@ -169,6 +179,9 @@
                 checkA(data);
             }
         });
+        $parent.on('right wrong', '.letter', function (e, data) {
+            increase($stats.find('.'+e.type));
+        });
         $ans.on('keyup', function (e) {
             if (challenge.state === 'running') {
                 if (e.which === KEYCODES.ANS) {
@@ -185,22 +198,52 @@
             var data = e.data;
             switch (data.cmd) {
                 case 'time':
-                    $sw.text(data.args);
+                    $sw.text(formatTime(time2obj(data.args)));
                     $cgState.text(challenge.state);
                     break;
                 case 'complete':
-                    alert('too slow');
+                    clockStop();
+                    //alert('too slow');
                     break;
             }
         }, false);
         sW.postMessage({ 
             cmd: 'onTick', 
-            args: "(function (){return function () { self.postMessage({ cmd: 'time', args: sw.time }) }})()"
+            args: "(function(){ return [function(){ self.postMessage({cmd:'time', args:sw.time}); }, 1] })()"
         });
         sW.postMessage({
             cmd: 'onComplete', 
-            args: "(function (){return function () { self.postMessage({ cmd: 'complete'}) }})()"
+            args: "(function(){ return [function(){ self.postMessage({cmd:'complete'});self.postMessage({cmd:'time', args:sw.time}); }] })()"
         });
         
+    }
+    function time2obj(mill) {
+
+        var 
+            secs = Math.floor(mill / 1000),
+            hours = Math.floor(secs / (60 * 60)),
+            minutes = Math.floor(secs / 60),
+            seconds = secs % 60,
+            mills= (mill % 1000),
+            obj = {
+                "h": fill(hours,2),
+                "m": fill(minutes,2),
+                "s": fill(seconds, 2),
+                "ms": fill(mills, 3)
+            };
+        return obj;
+
+        function fill(x, l) { 
+            return Array(l - x.toString().length + 1).join('0') + x;
+        }
+
+
+    }
+    function formatTime(timeObj) {
+        return timeObj.m + ':' + timeObj.s + ':' + timeObj.ms;;
+    }
+    function increase($elem) {
+        var n = $elem.text()*1;
+        $elem.text(++n);
     }
 })();
