@@ -12,18 +12,19 @@ PouchDB.plugin(require('pouchdb-find'));
 var q = require('q');
 var _ = require('lodash');
 
-var db = new PouchDB('test');
+var db = new PouchDB('atw/db/questions');
 
 
-db.put({
-    _id: 'pippo',
-    body: {
-        prop:'val'
-    }
-}).then(function () {
-    return db.info();
-})
-.then(function (res) { 
+//db.put({
+//    _id: 'pippo',
+//    body: {
+//        prop:'val'
+//    }
+//}).then(function () {
+//    return db.info();
+//})
+db.info()
+.then(function (res) {
     console.log(res)
 })
 .catch(function (res) {
