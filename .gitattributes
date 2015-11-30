@@ -1,3 +1,4 @@
 ﻿* text=auto
-test/CURRENT text eol=lf
-db/**/CURRENT text eol=lf
+test/CURRENT -text
+db/**/CURRENT -text
+CURRENT -text
