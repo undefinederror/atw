@@ -35,6 +35,7 @@ router.post(/\/(.*)/, function (req, res, next) {
             _res.send(res);
         })
         .catch(function (err) {
+            if (err.message) err = { message: err.message };
             _res.status(500).send(err);
         });
         
