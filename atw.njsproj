@@ -53,6 +53,7 @@
     <Content Include="atw\public\stylesheets\prism.css" />
     <Content Include="atw\public\stylesheets\shared.less" />
     <Content Include="atw\views\admin.jade" />
+    <Content Include=".gitattributes" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
