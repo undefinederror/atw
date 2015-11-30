@@ -1,2 +1,3 @@
-﻿test/CURRENT eol=lf
-db/**/CURRENT eol=lf
+﻿* text=auto
+test/CURRENT text eol=lf
+db/**/CURRENT text eol=lf

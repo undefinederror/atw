@@ -12,7 +12,8 @@ PouchDB.plugin(require('pouchdb-find'));
 var q = require('q');
 var _ = require('lodash');
 
-var db = new PouchDB('atw/db/questions');
+//var db = new PouchDB('atw/db/questions');
+var db = new PouchDB('test');
 
 
 //db.put({
