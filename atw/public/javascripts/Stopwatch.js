@@ -71,12 +71,12 @@
             },
             pause: function () {
                 if (!validMets.pause) return false;
+                t2 = new Date().getTime();
                 validMets.pause = false;
                 validMets.resume = true;
 
                 tTickId = clearInterval(tTickId);
                 tTotId = clearTimeout(tTotId);
-                t2 = new Date().getTime();
             },
             resume: function () {
                 if (!validMets.resume) return false;
@@ -95,6 +95,7 @@
                 validMets.start = true;
                 validMets.pause = false;
                 validMets.resume = false;
+                t = tot = t1 = t2 = 0;
             },
             onTick: function (cback, argTick) {
                 if (typeof argTick === 'number' && 
