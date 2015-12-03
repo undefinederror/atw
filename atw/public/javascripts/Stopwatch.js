@@ -64,7 +64,7 @@
                 validMets.stop = true;
                 validMets.pause = true;
 
-                t = argTot;
+                tot = t = argTot;
                 t1 = new Date().getTime();
                 tTotSet();
                 tTickSet();

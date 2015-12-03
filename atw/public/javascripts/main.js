@@ -221,8 +221,8 @@
 
         var 
             secs = Math.floor(mill / 1000),
-            hours = Math.floor(secs / (60 * 60)),
-            minutes = Math.floor(secs / 60),
+            hours = secs / (60 * 60) % 60 | 0,
+            minutes = secs / 60 % 60 | 0,
             seconds = secs % 60,
             mills= (mill % 1000),
             obj = {
