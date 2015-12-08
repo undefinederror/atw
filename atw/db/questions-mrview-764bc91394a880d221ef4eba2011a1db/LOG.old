@@ -1,5 +1,5 @@
-2015/11/25-04:30:26.865 2bec Recovering log #15
-2015/11/25-04:30:26.870 2bec Level-0 table #18: started
-2015/11/25-04:30:26.891 2bec Level-0 table #18: 764 bytes OK
-2015/11/25-04:30:26.893 2bec Delete type=0 #15
-2015/11/25-04:30:26.893 2bec Delete type=3 #13
+2015/11/30-05:32:31.813 2370 Recovering log #19
+2015/11/30-05:32:31.813 2370 Level-0 table #21: started
+2015/11/30-05:32:31.814 2370 Level-0 table #21: 247 bytes OK
+2015/11/30-05:32:31.816 2370 Delete type=0 #19
+2015/11/30-05:32:31.816 2370 Delete type=3 #17
