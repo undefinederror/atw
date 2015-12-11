@@ -1,0 +1,18 @@
+﻿body {
+  padding-top: 100px;
+  font-family: Consolas;
+}
+.konsole {
+  width: 350px;
+}
+.konsole code[class*="language-"] {
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+.btn {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+}
+/*# sourceMappingURL=admin.css.map */

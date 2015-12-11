@@ -1,0 +1,17 @@
+{
+  "name": "atw",
+  "version": "0.0.0",
+  "description": "atw",
+  "main": "app.js",
+  "author": {
+    "name": "vinz",
+    "email": ""
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "pouchdb": "^5.1.0",
+    "pouchdb-find": "^0.7.0",
+    "q": "^1.4.1"
+  }
+}

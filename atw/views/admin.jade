@@ -1,0 +1,68 @@
+﻿extend layout
+
+block vars
+    -var letterArr=['a','b','c','d','e','f','g','h','i','l','m','n','o','p','q','r','s','t','u','v','z'];
+    -var title = 'AroundTheAdmin';
+
+block append css
+    link(rel="stylesheet" type="text/css" href="admin.css")
+    link(rel="stylesheet" type="text/css" href="prism.css")
+
+block append js
+    script(src="prism.js" data-manual)
+
+block content
+    body.container
+        header.navbar.navbar-inverse.navbar-fixed-top.text-center
+            div.center-block
+                div.btn-group.btn-lg
+                    button(data-action="new").btn.btn-primary new
+                    button(data-action="put").btn.btn-success update
+                    button(data-action="remove").btn.btn-danger delete
+                div.btn-group.btn-lg
+                    button.btn.btn-default.dropdown-toggle#dropId(data-toggle="dropdown", aria-haspopup="true")
+                        |Ids 
+                        span.caret
+                    ul.dropdown-menu#qIdSelect(aria-labelledby="dropId")
+                mark tot records 
+                    span#nRecs.badge.badge-success 4
+
+        section.main.row
+            div.col-md-9.text-center
+                div.center-block
+                    div.row
+                        div.form-group.col-md-2
+                            div.input-group.col-md-12
+                                div.input-group-addon  _id
+                                input.form-control(data-db="_id", readonly="true", value="theid")
+                                //input.hidden(data-db="n", type="number")
+                        div.form-group.col-md-6
+                            div.input-group.col-md-12
+                                div.input-group-addon _rev
+                                input.form-control(data-db="_rev", readonly="true", value="therev")
+                        div.form-group.col-md-4
+                            div.input-group.col-md-12
+                                div.input-group-addon cat
+                                input.form-control(data-db="cat", placeholder="category")
+                
+                each letter in letterArr
+                    div.row
+                        div.form-group.col-md-1
+                            div.input-group.col-md-12
+                                span.badge(style="font-size:30px")=letter
+                        div.form-group.col-md-7
+                            div.input-group.col-md-12
+                                div.input-group-addon q
+                                input.form-control(data-db="letter." + letter + ".q", type=text)
+                        div.form-group.col-md-4
+                            div.input-group.col-md-12
+                                div.input-group-addon a
+                                input.form-control(data-db="letter." + letter + ".a", type=text, placeholder=letter+"...")
+            div.col-md-3
+                section.konsole.affix
+                    pre
+                        code.language-javascript
+
+    script(src="admin.js")
+
+block footer

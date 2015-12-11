@@ -1,0 +1,67 @@
+extends layout
+
+block vars
+    -var title='AroundTheWord';
+
+block mixins
+    mixin panel(i,j)
+        - for(;i-->0;){    
+        div.panel.panel-success.margin-top-20
+            div.panel-heading Panel #{i}
+            div.panel-body="Some content"
+            div.panel-footer.clearfix
+                - for(var jj=j;jj-->0;){    
+                div.col-md-4 content #{jj}
+                - }
+        - }
+
+block append css
+    link(rel="stylesheet", type="text/css", href="circle.css")
+
+block append js
+    script(src="Letter.js")
+    script(src="Letters.js")
+    //script(src="Stopwatch.js")
+
+block content
+    body.container
+        div.row
+            div.col-md-3
+                div.panel.panel-success.margin-top-20
+                    div.panel-heading Time 
+                        span.glyphicon.glyphicon-time
+                    div.panel-body
+                        span#challengeState idle
+                    div.panel-footer.clearfix.text-center
+                        h2#sw.center-block.marg-0
+                div#stats.panel.panel-success.margin-top-20
+                    div.panel-heading Stats 
+                        span.glyphicon.glyphicon-stats
+                    div.panel-body
+                        span
+                    div.panel-footer.clearfix.text-center
+                        div.col-md-4.pad-0 
+                            h4 
+                                label.label.label-success right 
+                            label.right 0
+                        div.col-md-4.pad-0 
+                            h4 
+                                label.label.label-danger wrong 
+                            label.wrong 0
+                        div.col-md-4.pad-0 
+                            h4
+                                label.label.label-warning pass 
+                            label.pass 0
+                            
+                +panel(2,3)
+            div.col-md-9
+                div#circleContainer
+                    div#questionContainer
+                        div.question 
+                            
+                        input.form-control.ans(type="text")
+                        div.btnContainer
+                            button.btn.btn-primary(data-action="start") start challenge
+                            button.btn.btn-warning(data-action="pass", style="display:none") pass
+
+    script(src="main.js")

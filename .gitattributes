@@ -1,0 +1,4 @@
+﻿* text=auto
+test/CURRENT -text
+db/**/CURRENT -text
+CURRENT -text
