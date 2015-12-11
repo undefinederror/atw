@@ -1,0 +1,5 @@
+2015/12/05-19:52:36.938 32cc Recovering log #22
+2015/12/05-19:52:36.952 32cc Level-0 table #24: started
+2015/12/05-19:52:36.954 32cc Level-0 table #24: 622 bytes OK
+2015/12/05-19:52:36.956 32cc Delete type=0 #22
+2015/12/05-19:52:36.956 32cc Delete type=3 #20
