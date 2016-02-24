@@ -106,7 +106,7 @@
     }
     function konsole(txt) {
         var out = txt;
-        if (typeof txt === 'object') out = JSON.stringify(txt);
+        if (typeof txt === 'object') out = JSON.stringify(txt,null,2);
         $konsole.text(out);
         Prism.highlightAll();
     }

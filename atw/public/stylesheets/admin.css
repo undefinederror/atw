@@ -3,7 +3,11 @@
   font-family: Consolas;
 }
 .konsole {
-  width: 350px;
+  max-height: 85%;
+  display: flex;
+}
+.konsole pre[class*="language-"] {
+  overflow: auto;
 }
 .konsole code[class*="language-"] {
   -ms-word-wrap: break-word;
@@ -15,4 +19,3 @@
   font-size: 18px;
   font-weight: bold;
 }
-/*# sourceMappingURL=admin.css.map */
