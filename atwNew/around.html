@@ -1,0 +1,156 @@
+<html>
+<head>
+<style>
+/*---  countdown Circular ---*/
+.item {
+    /*position: relative;*/
+    position:absolute;
+    width: 600px; height: 600px;
+    top:0; left:0; right:0; bottom:0;
+    margin: auto;
+    /*float: left;*/
+    
+}
+
+.item h2 {
+    text-align:center;
+    position: absolute;
+    line-height: 125px;
+    width: 100%;
+}
+
+svg {
+   -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    position:absolute;
+    width: 600px; height: 600px;
+    top:0; left:0; right:0; bottom:0;
+    margin: auto;
+}
+   
+/* countdown */
+.circle_animation {
+  stroke-dasharray: 785; /* this value is the pixel circumference of the circle */
+  stroke-dashoffset: 785;
+/* this value is the pixel circumference of the circle */
+  /*stroke-dasharray: 440; 
+  stroke-dashoffset: 440;*/
+  transition: all 1s linear;
+}
+/* circle placement */
+#qWrap {
+    width: 600px; 
+    height: 600px; 
+    border: 1px solid #000; 
+    position: relative; 
+}
+#center { 
+    width: 10px; 
+    height: 10px; 
+    position: absolute; 
+    left: 295px; 
+    top: 295px; 
+    background: #000; 
+    }
+.itemQ { 
+    width: 20px; 
+    height: 20px; 
+    position: absolute; 
+    border:1px solid #999; 
+    line-height: 20px; 
+    font-family: sans-serif; 
+    color:#999
+}
+#crosshair-x { 
+    width: 600px; 
+    height: 1px; 
+    background: #000; 
+    position: absolute; 
+    left: 0; 
+    top: 300px; 
+}
+#crosshair-y {
+    width: 1px; 
+    height: 600px; 
+    background: #000; 
+    position: absolute; 
+    left: 300px; 
+    top: 0; 
+}   
+#qWrap li {
+    list-style-type: none; 
+    text-align: center; 
+    border-radius:50%;
+}
+.itemQ.active{
+    background:#999; 
+    border:1px solid #686868; 
+    color:#fff;
+    transform: scale(1.53);
+}
+.itemQ.wrong{
+    background:#fd5757; 
+    border:1px solid #d60000; 
+    color:#fff;
+}
+.itemQ.right{
+    background:#7dff99; 
+    border:1px solid #11b534; 
+    color:#fff;
+}
+.itemQ.passed{
+    background:#e7eb6d; 
+    border:1px solid #fff; 
+    color:#fff;
+}
+</style>
+</head>
+    <body>
+        <!--
+        <div id="container">
+        <div id="center"></div>
+        <div id="crosshair-x"></div>
+        <div id="crosshair-y"></div>
+        -->        
+        <div class="item html">
+            <ul id="qWrap" style="position:absolute;padding:0; margin:0;">
+                <li id="q0" class="a itemQ">A</li>            
+                <li id="q1" class="b itemQ">B</li>
+                <li id="q2" class="c itemQ">C</li>
+                <li id="q3" class="d itemQ">D</li>
+                <li id="q4" class="e itemQ">E</li>            
+                <li id="q5" class="f itemQ">F</li>
+                <li id="q6" class="g itemQ">G</li>
+                <li id="q7" class="h itemQ">H</li>
+                <li id="q8" class="i itemQ">I</li>            
+                <li id="q9" class="l itemQ">L</li>
+                <li id="q10" class="m itemQ">M</li>
+                <li id="q11" class="n itemQ">N</li>
+                <li id="q12" class="o itemQ">O</li>            
+                <li id="q13" class="p itemQ">P</li>
+                <li id="q14" class="q itemQ">Q</li>
+                <li id="q15" class="r itemQ">R</li>
+                <li id="q16" class="s itemQ">S</li>            
+                <li id="q17" class="t itemQ">T</li>
+                <li id="q18" class="u itemQ">U</li>
+                <li id="q19" class="v itemQ">V</li>
+                <li id="q20" class="z itemQ">Z</li>
+            </ul>
+            <div id="question" data-current="q0" style="position:absolute;top:10%; left:10%;"></div>
+            <br />
+            <input id="answer" data-current="q0" type="text" style="position:absolute;top:20%; left:10%; z-index:10;" />       
+            <h2>
+                <span id="min"></span>
+            </h2>             
+            <svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
+                <g>              
+                    <circle id="circle" class="circle_animation" r="125" cy="300" cx="300" stroke-width="8" stroke="#6fdb6f" fill="none"/>
+                </g>
+            </svg>
+        </div>
+        <button id="btn">btn</button>
+    </body>
+    <script src="https://f219a823068d097e49db-b14287cf40d335cde5226be95ca3ee6b.ssl.cf3.rackcdn.com/TweenMax.min.js" ></script>
+    <script src="js/questions.js"></script>
+    <script src="js/app.js"></script>    
+</html>

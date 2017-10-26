@@ -1,0 +1,638 @@
+<html>
+<head>
+<style>
+/*---  countdown Circular ---*/
+.item {
+    position: relative;
+    float: left;
+}
+
+.item h2 {
+    text-align:center;
+    position: absolute;
+    line-height: 125px;
+    width: 100%;
+}
+
+svg {
+   -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.circle_animation {
+  stroke-dasharray: 440; /* this value is the pixel circumference of the circle */
+  stroke-dashoffset: 440;
+  transition: all 1s linear;
+}
+</style>
+</head>
+    <body>
+        <ul id="qWrap">
+            <li id="q0" class="a">A</li>            
+            <li id="q1" class="b">B</li>
+            <li id="q2" class="c">C</li>
+            <li id="q3" class="d">D</li>
+            <li id="q4" class="e">E</li>            
+            <li id="q5" class="f">F</li>
+            <li id="q6" class="g">G</li>
+            <li id="q7" class="h">H</li>
+            <!--<li id="q5" class="e" data-answered="false"></li>-->
+            <div id="question" data-current="q0"></div>
+            <br />
+            <input id="answer" data-current="q0" type="text" />
+        </ul>
+        <div class="item html">
+            <h2><span id="min"></span><br /><span id="sec"></span></h2>             
+            <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+             <g>
+              <title>Layer 1</title>
+              <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="8" stroke="#6fdb6f" fill="none"/>
+             </g>
+            </svg>
+        </div>
+    </body>
+    <script>       
+         var qa = {          
+            "a":[
+                    ["Acqua","disseta gli assetati"],
+                    ["Andersen","a Copenhagen gli e' stata dedicata una Sirenetta"],
+                    ["Attinia","altro nome dell'anemone di mare"],
+                    ["Amedei","Amedeo, 'il fornaretto' idolatrato dai romanisti"],
+                    ["Acapulco","citta' messicana celebre per le sue spiagge"],
+                    ["Antartide","di quale continente il monte Vinson (5.150 mt.) e' il massiccio piu' alto"],
+                    ["Arancia","e' il frutto piu' conosciuto della famiglia delle rutacee"],
+                    ["Australia","e' il paese con piu' pecore"],
+                    ["Aorta","E' il piu' grande vaso sanguigno del corpo umano"],
+                    ["Amen","e' l'ultima parola della Bibbia"],
+                    ["Annapurna","fu la prima cima oltre gli 8.000 metri ad essere conquistata"],
+                    ["Alaska","fu pagata piu' di 7 milioni di dollari nel 1867 dagli Stati Uniti"],
+                    ["Agamennone","fu ucciso da Clitennestra"],
+                    ["Aborigeni","gli originari abitanti dell'australia"],
+                    ["Artificiali","i 'paradisi' di Baudelaire"],
+                    ["Amaro","il 'riso' di Giuseppe De Santis"],
+                    ["Angiolieri","il Cecco che si fece beffe del 'dolce stil novo'"],
+                    ["auriga","il cocchiere del carro da corsa nell'antica Roma"],
+                    ["Africa","il continente che comprende il maggior numero di nazioni"],
+                    ["Africa","il continente con la Sierra Leone"],
+                    ["Allah","il dio del quale porta il nome la perla piu' grossa del mondo"],
+                    ["Abbondio","il Don che camminava in una stradicciola nei pressi del lago di Como il 7 novembre 1628"],
+                    ["Arno","il fiume in cui Manzoni fece 'il bucato'"],
+                    ["Agamennone","il fratello di Menelao"],
+                    ["Arpino","il Giovanni che ha scritto La suora giovane"],
+                    ["Anquetil","il Jacques ciclista francese che ha vinto il Tour per quattro volte consecutive"],
+                    ["Anarchismo","il movimento politico fondato da Michail Bakunin"],
+                    ["Australia","il paese che ha accolto piu' di 75.000 forzati tra il 1750 e il 1840"],
+                    ["Ara","il pappagallo che ha le maggiori dimensioni"],
+                    ["Arthur AShe","il primo tennista di colore a vincere Wimbledon"],
+                    ["Ashe","il primo tennista di colore a vincere Wimbledon"],
+                    ["Avati","il Pupi regista italiano che ha fatto Una gita scolastica"],
+                    ["Agostino","il santo che ha scritto De civitate Dei"],
+                    ["Alcatraz","l'edificio che sorge su di uno scoglio della baia di San Francisco"],
+                    ["Aureliano","l'imperatore da cui prese il nome la citta' di Orleans"],
+                    ["Amleto","l'opera di Shakespeare nella quale i protagonisti muoiono quasi contemporaneamente"],
+                    ["Aida","l'opera di Verdi composta per l'inaugurazione dell'Opera del Cairo"],
+                    ["Abbey Road","l'ultimo album dei beatles"],
+                    ["Ambrosia","la bevanda degli dei dell'Olimpo"],
+                    ["Ande","la catena montuosa percorsa dalla linea ferroviaria piu' alta del mondo"],
+                    ["Amsterdam","la citta' in cui si trova il Dam"],
+                    ["Acqui","la citta' in cui si trova la cosiddetta Fontana miracolosa, con acqua minerale a 75 gradi"],
+                    ["Assuan","la diga che in Egitto ha permesso di strappare 800.000 ettari al deserto"],
+                    ["Anastasia","la figlia dello zar Nicola II che scampo' alla morte nel corso della rivoluzione russa"],
+                    ["Andrews","la Julie protagonista di Mary Poppins"],
+                    ["Agave","La pianta dalla quale si ricava la tequila"],
+                    ["Ancora","la porta tatuata Braccio di Ferro"],
+                    ["Alcazar","la reggia dei re mori a Siviglia"],
+                    ["Actor's Studio","la scuola nella quale si sono formati Marlon Brando e Robert De Niro"],
+                    ["Atletica","lo sport che deve il suo nome alla parola greca che significa 'combattimento'"],
+                    ["Automobilismo","lo sport in cui Emerson Fittipaldi e' stato campione del mondo"],
+                    ["Abolizionisti","negli Stati Uniti erano gli oppositori della schiavitu'"],
+                    ["Amigdala","parola che significa 'a forma di mandorla'"],
+                    ["Aruspici","prevedevano il futuro studiando le viscere degli animali"],
+                    ["anaerobico","processo che si svolge in assenza di ossigeno"],
+                    ["Abelardo","scambio' lettere d'amore con Eloisa"],
+                    ["Amarone","tipo di vino rosso del Veneto"],
+                    ["adenoidi","tonsille faringee"],
+                    ["Argentina","vi fu catturato Adolf Eichmann"],
+                    ["Aspromonte","vi provengono i pastori del romanzo del 1930 di Corrado Alvaro"],
+                    ["Australia","vi si trova il deserto di Simpson"],
+                    ["Antartide","vi si trova il mare di Ross"],
+                    ["testA2", "A2"],
+                    ["testA3", "A3"],
+                    ["testA4", "A4"],
+                    ["testA5", "A5"],
+                    ["testA6", "A6"],
+                    ["Addizzione", "Operazione matematica"],
+                    ["Artificiali","'paradisi' di Baudelaire"],
+                    ["Arco", "arma con frecce"]
+            ],
+            "b":[                
+                    ["Bianco","e' il colore del lutto nei paesi musulmani"],
+                    ["Bardotto","e' il risultato dell'incrocio tra un cavallo e un asina"],
+                    ["Brasile","e' la quinta nazione piu' grande del mondo"],
+                    ["Beretta","hanno cominciato vendendo archibugi alla Serenissima e finito col vendere pistole all'FBI"],
+                    ["Bridge","il campionato del mondo vinto dal 'blue team' italiano"],
+                    ["Bacco","il dio del vino per i romani"],
+                    ["bianca","il film in cui Moretti (brrr) dice 'Come si fa a dormire con una donna con cui si e' fatto l'amore?'"],
+                    ["Buridano","il filosofo al quale si associa un asino morto di fame perche' incerto tra due cibi"],
+                    ["Bordin","il Gelindo primo italiano a vincere una maratona olimpica"],
+                    ["Bettega","il giocatore di calcio italiano che ha militato a fine carriera nei Toronto Blizzards"],
+                    ["Badminton","il gioco con le racchette apparso in Inghilterra verso il 1860"],
+                    ["Beach Boys","il gruppo formato dai fratelli Wilson nel 1961"],
+                    ["Baltico","il Mare che separa Riga da Stoccolma"],
+                    ["Bongiorno","il Mike che disse a una concorrente 'Ahi, ahi, signora Longari, mi e' caduta sull'uccello'"],
+                    ["Bongiorno","il Mike presentatore che fu condannato a morte per spionaggio nel 1944 da un tribunale militare tedesco"],
+                    ["Baracca","il pilota che aveva sull'aereo il cavallino rampante simbolo della Ferrari"],
+                    ["Barbarossa","il soprannome di Federico I imperatore germanico dal 1152 al 1190"],
+                    ["Bolscioi","il teatro del piu' famoso corpo di ballo di danza classica di Mosca"],
+                    ["Blueberry","il tenente disertore dell'esercito americano che e' un eroe dei fumetti"],
+                    ["Brandt","il Willy sindaco di Berlino Ovest che accolse J.F. Kennedy"],
+                    ["Bonsai","l'albero nano giapponese"],
+                    ["Bolena","l'Anna madre di Elisabetta I di Inghilterra"],
+                    ["Bouquet","l'aroma di un vino"],
+                    ["Boito","l'Arrigo librettista di Giuseppe Verdi che scrisse la musica di un'opera"],
+                    ["Boy-Scouts","l'associazione fondata dall'ufficiale britannico Robert Baden-Powell nel 1907"],
+                    ["Brando","l'attore che si rifiuto' di ritirare il secondo premio Oscar"],
+                    ["Bergman","l'attrice che ha debuttato nel 1938 con Intermezzo"],
+                    ["Bonaccorti","l'Enrica che divento' una star televisiva con la trasmissione Pronto, chi gioca?"],
+                    ["Bearzot","l'Enzo commissario tecnico della nazionale italiana vincitrice dei mondiali di calcio di spagna nel 1982"],
+                    ["Barletta","la 'Disfida' in cui gli italiani furono guidati da Ettore Fieramosca"],
+                    ["Baffi","la caratteristica facciale di Walt Disney che nessun altro collaboratore era autorizzato ad avere"],
+                    ["Brindisi","la citta' dalla quale Vittorio Emanuele III si imbarco' per lasciare definitivamente l'Italia"],
+                    ["Bruxelles","la citta' in cui fu organizzata l'esposizione universale del 1958"],
+                    ["Buenos Aires","la citta' in cui si trova la Casa Rosada"],
+                    ["Bouvier","la Jacqueline che ebbe J.F. Kennedy come primo marito"],
+                    ["Bronzo","la lega formata da rame e stagno"],
+                    ["Bose'","la Lucia protagonista del film di Maselli Gli sbandati"],
+                    ["Bianchina","la macchina di Fantozzi"],
+                    ["Butterfly","La Madama che si suicida con la sciabola del padre"],
+                    ["Bose","la Miss Italia che divenne una star del cinema e sposo' un famoso torero"],
+                    ["Bergamo","la provincia dove troviamo la casa di Arlecchino"],
+                    ["Bauhaus","la scuola tedesca di design e architettura diretta da Walter Gropius"],
+                    ["Bob","la slitta munita di volante con la quale si scende lungo piste ghiacciate"],
+                    ["Bernadette","la Soubirous a cui la Vergine Maria apparve a Lourdes"],
+                    ["Barbare","le 'Odi' del Carducci"],
+                    ["Bronte","le sorelle che scrivevano sotto gli pseudonimi di Currer, Ellis e Acton Bell"],
+                    ["Blue Jeans","li invento' Levi-Strauss"],
+                    ["Boraciferi","lo sono i soffioni di Larderello"],
+                    ["Baseball","lo sport americano che e' stato ammesso alle olimpiadi nel 1984"],
+                    ["Bhutto","lo Zulfikar Ali' impiccato in Pakistan nel 1979"],
+                    ["Bischero","parte di uno strumento a corde"],
+                    ["brina","Rugiada congelata"],
+                    ["Bolas","sono usate nelle pampas per catturare gli animali"],
+                    ["Bonn","vi nacque Ludwig Van Beethoven"]            
+            ],
+            "c":[                
+                    ["Copechi","100 formano un rublo"],
+                    ["Caliga","calzatura degli antichi soldati romani"],
+                    ["Carezza","celebre lago dolomitico che in tedesco si chiama Carersee"],
+                    ["Cagliari","citta' sarda in cui si celebra la festa di Sant'Efisio"],
+                    ["Caravaggio","cosi' era detto il pittore Michelangelo Merisi"],
+                    ["Carlomagno","era figlio di Pipino il Breve"],
+                    ["Corrado","era il conduttore della trasmissione radiofonica Rosso e nero"],
+                    ["Citroen","fabbrico' la prima auto a trazione anteriore"],
+                    ["Churchill","fu il Primo Ministro del regno di Elisabetta II di Inghilterra"],
+                    ["Carlomagno","fu incoronato imperatore nella notte di Natale dell'800"],
+                    ["Cleopatra","fu l'ultimo sovrano regnante della stirpe dei Tolomei"],
+                    ["Cagliari","fu la prima squadra di calcio a sud di Roma a vincere lo scudetto"],
+                    ["Cicerone","fu mortale avversario di Catilina"],
+                    ["Cartaginesi","furono sconfitti da Caio Duilio a Milazzo nel 260 a.C."],
+                    ["Cana","Gesu' vi compi' il miracolo della trasformazione dell'acqua in vino"],
+                    ["Chopin","ha composto 50 mazurche, 19 valzer e 14 polacche"],
+                    ["Cellini","ha scolpito la statua di Perseo che orna la loggia dei Lanzi a Firenze"],
+                    ["Colombo","ha scoperto la Giamaica"],
+                    ["Capillari","i piu' piccoli vasi sanguigni"],
+                    ["Castel del Monte","il castello a pianta e torrioni ottagonali che Federico II ha lasciato in Puglia"],
+                    ["Chaplin","il Charlie che ha realizzato L'opinione pubblica nel 1923"],
+                    ["Chaplin","il Charlie che ha sposato Oona O'Neill"],
+                    ["Cervi","il Gino che e' stato Ettore Fieramosca e Peppone"],
+                    ["Cervi","il Gino che interpretava Maigret"],
+                    ["Cousteau","il Jacques che esplorava le profondita' marine"],
+                    ["Clark","il Jim corridore soprannominato lo scozzese volante"],
+                    ["Chagall","il Marc che ha dipinto il soffitto dell'Opera di Parigi"],
+                    ["Calderone","il nome del ghiacciaio del Gran Sasso, unico di tutti gli appennini"],
+                    ["Canada","il paese che ha l'hockey su ghiaccio come sport nazionale"],
+                    ["Cina","il paese del panda gigante"],
+                    ["Cecoslovacchia","il paese invaso dalle truppe sovietiche nel 1968"],
+                    ["Chigi","il palazzo dove ha l'ufficio il primo ministro italiano"],
+                    ["Corriere della Sera","il quotidiano che ha sede in V. Solferino a Milano"],
+                    ["Casanova","il seduttore per antonomasia"],
+                    ["Carlo V","il sovrano sul cui impero il sole non tramontava mai"],
+                    ["Capitale","il suo primo volume e' 'Sviluppo della produzione capitalista'"],
+                    ["Cornamusa","il tipico strumento musicale degli scozzesi"],
+                    ["Ceylon","il vecchio nome dello Sri Lanka"],
+                    ["Cianidrico","l'acido che e' detto anche prussico"],
+                    ["Circo","l'ammaestratore di pulci ne e' il mestiere piu' faticoso per gli occhi"],
+                    ["Cammello","l'animale che forni' aiuto decisivo nelle campagne di Lawrence d'Arabia"],
+                    ["Coccodrillo","l'animale che si dice abbia rimorsi"],
+                    ["Cicala","l'animale che si esprime con 7.400 pulsazioni al minuto"],
+                    ["Che Guevara","l'Ernesto il cui cadavere fu esposto (brrr) dall'esercito boliviano nel 1967"],
+                    ["caracalla","l'imperatore che fece costruire a Roma il piu' famoso stabilimento termale"],
+                    ["Canossa","l'imperatore Enrico IV vi imploro' il perdono di Papa Gregorio VII"],
+                    ["Capri","l'imperatore Tiberio vi passava abitualmente le vacanze"],
+                    ["Cuba","l'isola piu' grande delle Antille"],
+                    ["Clouseau","l'ispettore interpretato da Peter Sellers"],
+                    ["Cicerone","l'oratore che svento' la congiura di Catilina"],
+                    ["Croce Rossa","l'organizzazione internazionale che ha vinto il solo premio Nobel assegnato durante la Prima Guerra Mondiale"],
+                    ["Cime tempestose","l'unico romanzo di Emily Bronte"],
+                    ["Chamberlain","l'uomo politico inglese che firmo' il patto di Monaco"],
+                    ["Calva","la 'cantatrice' di Ionesco"],
+                    ["Coca Cola","la bevanda alla quale corrisponde la formula segreta 7x"],
+                    ["Catania","la citta' con l'aeroporto Fontana Rossa"],
+                    ["Cnosso","la citta' cretese scoperta da Sir Arthur Evans"],
+                    ["Chaplin","La contessa di Honk Kong e' stato il suo ultimo film"],
+                    ["Athletics","la Gigliola che nel 1964 cantava Non ho l'eta'"],
+                    ["Cinquetti","la Gigliola che nel 1964 cantava Non ho l'eta'"],
+                    ["Chatterley","la Lady che fu l'amante del giardiniere"],
+                    ["Carie","la malattia non contagiosa piu' comune al mondo"],
+                    ["Curie","la Marie che ha vinto due premi Nobel"],
+                    ["Calipso","la ninfa che trattenne Ulisse per 10 anni"],
+                    ["Cartagine","la potenza nemica di Roma che disponeva di 5.000 navi"],
+                    ["Curie","la prima donna a vincere un premio Nobel"],
+                    ["Castelgandolfo","la residenza estiva del papa"],
+                    ["Chiara","la Santa protettrice di chi lavora in televisione"],
+                    ["Cosmos","la squadra statunitense in cui a fine carriera milito' Giorgio Chinaglia"],
+                    ["Continenti","li rappresentano i cinque cerchi olimpici"],
+                    ["Comune","lo e' la 'gente' per Robert Redford"],
+                    ["Cricket","lo sport dal quale deriva il baseball"],
+                    ["Calcio","lo sport piu' praticato al mondo"],
+                    ["Cipro","lo stato con Limassol"],
+                    ["Cromosfera","lo strato intermedio dell'atmosfera fra la fotosfera e la corona"],
+                    ["Coca Cola","nel 1886 veniva venduta per 5 cents a bicchiere dal signor Pemberton in una farmacia di Atlanta"],
+                    ["Costellazioni","nella nostra galassia ce ne sono 88"],
+                    ["caglio","si aggiunge al latte per ottenere il formaggio"],
+                    ["Cordless","telefono senza fili"],
+                    ["Clitennestra","uccise Agamennone"],
+                    ["Calais","una delle due citta' tra le quali si tenta generalmente la traversata della Manica a nuoto"],
+                    ["Cantonese","una delle grandi scuole in cui si divide la cucina cinese"],
+                    ["Caio","uno dei Gracchi"],
+                    ["Chicago","vi nacque l'associazione Rotary"],
+                    ["Courmayeur","vi si prende la funivia in Italia per ammirare la Mer de Glace"],
+                    ["Canada","vi si trova il polo nord magnetico"],
+                    ["Camelot","vi si trovava la corte di Re Artu'"]
+              
+            ],
+            "d":[                
+                    ["Dispepsia","difficolta' di digestione"],
+                    ["Domenica","era 'd'agosto' per il regista Luciano Emmer"],
+                    ["Dayan","era ministro della difesa israeliano durante la guerra dei sei giorni"],
+                    ["Dante","ha scritto la vita nuova"],
+                    ["Diamante","il campo del Baseball"],
+                    ["de Mille","il Cecil B. che ha diretto una versione muta e una sonora de I dieci comandamenti"],
+                    ["Darwin","il Charles che sollevo' uno scandalo con La teoria dell'evoluzione"],
+                    ["D","il cognome di 'Umberto' in un film di De Sica"],
+                    ["Damocle","il cortigiano di Dionigi il Vecchio al quale fu sospesa una spada sul capo"],
+                    ["Dore'","il Gustave incisore francese che ha illustrato Don Chisciotte, Divina commedia, Bibbia e l'Orlando furioso"],
+                    ["Dunlop","il John che ha inventato il pneumatico"],
+                    ["Daguerre","il Luis che scopri' il procedimento di sviluppo delle immagini fotografiche"],
+                    ["dieci","il numero di carte che si danno a ciascun giocatore nel tressette"],
+                    ["Danimarca","il paese il cui territorio e' costituito principalmente dalla penisola dello Jutland"],
+                    ["Delon","interpreta un pugile in Rocco e i suoi fratelli"],
+                    ["Durer","l'Albrecht pittore tedesco de I quattro apostoli"],
+                    ["Delfino","l'erede al trono francese"],
+                    ["Duncan","l'Isadora che fece scandalo ballando a piedi nudi"],
+                    ["Deneuve","la Catherine Bella di giorno"],
+                    ["Dum-Dum","la citta' indiana che ha dato il nome a proiettili da fucile"],
+                    ["Dietrich","la Marlene 'angelo azzurro'"],
+                    ["Dorate","le ali del 'pensiero' di Verdi"],
+                    ["dirigibile","lo fu l'Hindenburgh"],
+                    ["Divorzio","ottenne il voto favorevole del 60% degli italiani il 13 maggio 1974"],
+                    ["daga","Spada corta e larga a due tagli"]
+          
+            ],   
+            "e":[                
+                    ["Edipo","Accecato, fu guidato da Antigone"],
+                    ["Epifisi","altro nome della ghiandola pineale"],
+                    ["Eisenhower","comandava le forze armate alleate durante lo sbarco in Normandia"],
+                    ["Elisir di lunga vita","diceva di possederlo il Conte di Saint Germain"],
+                    ["Edonismo","dottrina che ha come principio la ricerca del piacere"],
+                    ["Emofilia","e' la malattia dei re"],
+                    ["Eleganza","il campo nel quale dettava legge Lord Brummel"],
+                    ["Eschilo","il drammaturgo greco che si dice sia morto colpito da una tartaruga lasciata cadere da un aquila in volo"],
+                    ["Ellington","il Duke 'duca' del jazz"],
+                    ["Ezechiele","il lupo che da la caccia ai tre porcellini"],
+                    ["Ewan","Il nome dell'attore McGregor"],
+                    ["Enrico VIII","il padre di Elisabetta I di Inghilterra"],
+                    ["Ecuador","il paese al quale appartengono le Galapagos"],
+                    ["Eldorado","il paese d'oro cercato dai conquistatori spagnoli"],
+                    ["Ermitage","il palazzo fatto costruire a Pietroburgo da Caterina II che e' oggi un museo"],
+                    ["Elfi","il popolo sul quale regnava Oberon"],
+                    ["Einstein","l'Albert che disse 'Dio non gioca a dadi'"],
+                    ["Esegesi","l'interpretazione di un testo"],
+                    ["Evita","la commedia musicale dalla quale e' tratta la canzone Don't cry for me Argentina"],
+                    ["Euratom","la comunita' europea dell'energia atomica"],
+                    ["banana yoshimoto","la comunita' europea dell'energia atomica"],
+                    ["Eucalipto","la pianta delle cui foglie si nutre il koala"],
+                    ["Eclittica","la traiettoria apparente del sole in un anno"],
+                    ["Equitazione","lo sport al quale appartiene l'espressione 'mezza volta'"],
+                    ["Equitazione","lo sport olimpico in cui donne e uomini gareggiano alla pari"],
+                    ["Eloisa","scambio' lettere d'amore con Abelardo"],
+                    ["Etologia","scienza che studia il comportamento degli animali"],
+                    ["Emirati Arabi Uniti","sono formati da Abu Dhabi, Dubai, Sharjah, Ajman, Umm al Quaiwain, Ras al-Khaimah e Fujayrah"],
+                    ["Enrico II","sposo' Caterina de Medici"],
+                    ["Esau'","vendette il suo diritto di primogenitura per un piatto di lenticchie"],
+                    ["Eton","vi si trova la piu' celebre Public school inglese fondata da Enrico VI"]
+               
+            ],   
+            "f":[                
+                ["Formica","animale che per la Bibbia e' simbolo di saggezza"],
+                ["Fotodiodo","Componente elettronico capace di entrare in conduzione solo se colpito da luce"],
+                ["Fornarina","cosi' era soprannominata la figlia di un panettiere romano amata da Raffaello"],
+                ["Filippo II","creo' l'Invincibile Armada"],
+                ["Fedra","figlia di Minosse e sorella di Arianna"],
+                ["Fellini","giro' Le notti di Cabiria"],
+                ["Fossa delle Marianne","ha una profondita' di circa 11.000 m."],
+                ["Fracassa","il 'Capitan' soprannome del barone di Sigognac"],
+                ["Fosse","il Bob che ha realizzato Cabaret e All that jazz"],
+                ["Faraday","il Michael che ha dato il suo nome a una 'gabbia' e a un 'cilindro'"],
+                ["Falklands","il nome britannico delle Isole Malvine"],
+                ["Filogamo","Il Nunzio che salutava i Cari amici vicini e lontani"],
+                ["Fangio","il pilota argentino che ha vinto 5 titoli mondiali di F1"],
+                ["Fanfani","il primo presidente del consiglio a installarsi a Palazzo Chigi"],
+                ["Fra Diavolo","il soprannome del bandito Michele Pezza"],
+                ["Flynn","l'Errol che ha interpretato Robin Hood sul grande schermo"],
+                ["Fieramosca","l'Ettore che guido' gli italiani nella Disfida di Barletta"],
+                ["femore","l'osso piu' lungo del corpo umano"],
+                ["Furtiva","la 'lacrima' di Donizetti"],
+                ["fanfara","la banda dei bersaglieri"],
+                ["Foglie","la parte dell'albero in cui avviene la fotosintesi clorofilliana"],
+                ["Farnesina","La sede del Ministero degli Esteri"],
+                ["Ferrari","la vettura con la quale Niki Lauda e' stato per due volte campione del mondo"],
+                ["Falsario","lo era Gianni Schicchi, nominato da Dante nel suo Inferno"],
+                ["Fangio","pilota che vinse 4 campionati mondiali consecutivi in F1"],
+                ["Federico II","re prussiano del XVIII secolo considerato un esempio di 'despota illuminato'"]
+            
+            ],   
+            "g":[                
+                    ["Gordio","Alessandro Magno ne taglio' con la spada l'inestricabile nodo"],
+                    ["Gravina","Carla, prima attrice italiana a diventare deputato"],
+                    ["Gomorra","Citta' della Palestina che secondo Mose' fu distrutta per i suoi vizi da un incendio"],
+                    ["Gatsby","e' 'Grande' nel romanzo di Francis Scott Fitzgerald"],
+                    ["Ginevra","era la moglie di re Artu' e l'amante di Lancillotto"],
+                    ["Giorgio VI","era re di Inghilterra durante la seconda guerra mondiale"],
+                    ["Giotto","fece il campanile del duomo di Firenze"],
+                    ["Garibaldi","fu definito dal Carducci 'novello Romolo'"],
+                    ["Girardengo","fu spodestato da Binda dal trono del ciclismo italiano"],
+                    ["Goodyear","ha scoperto la vulcanizzazione del caucciu'"],
+                    ["Gable","il Clark di Via col vento"],
+                    ["Grimaldi","il cognome da ragazza di Carolina di Monaco"],
+                    ["Giano","il dio romano dal quale gennaio prende il nome"],
+                    ["Gershwin","il George che ha composto Porgy and Bess"],
+                    ["Gershwin","il George che ha composto Summertime"],
+                    ["Giancattivi","il gruppo del quale faceva parte Francesco Nuti"],
+                    ["Gandhi","il leader cremato il 31 gennaio 1948 sulle rive del Gange"],
+                    ["Gaye","il Marvin cantante ucciso dal padre a colpi di pistoia"],
+                    ["Giovanna","il nome dell'unica donna che, secondo una leggenda medievale, sia stata assunta al soglio pontificio"],
+                    ["Gargantua","il padre di Pantagruel"],
+                    ["Grecia","il paese dell'ouzo"],
+                    ["Goya","il pittore spagnolo che fece 'i capricci'"],
+                    ["Giapponese","il popolo che ha un alfabeto di 28.000 simboli"],
+                    ["Genesi","il primo libro dell'Antico Testamento"],
+                    ["Giona","Il profeta ingoiato da una balena"],
+                    ["Gallina","il volatile piu' diffuso della terra"],
+                    ["Guinness","l'Alec che ha interpretato otto personaggi nel film Sangue blu"],
+                    ["Ghepardo","l'animale che e'uo' raggiungere i 101 km/h"],
+                    ["Gramsci","l'Antonio fondatore del PCI (brrr) sepolto nel cimitero degli inglesi a Roma"],
+                    ["Giuliano","L'Apostata che mori' dicendo 'Hai vinto, Galileo'"],
+                    ["Giovenale","l'autore del famoso verso latino 'Mens sana in corpore sano'"],
+                    ["Gesuiti","l'ordine fondato da Ignazio di Loyola"],
+                    ["Grog","la bevanda a base di alcol che ha la fama di curare il raffreddore"],
+                    ["Giumenta","la cavalla da sella"],
+                    ["Gibilterra","la colonia britannica che e' soprannominata 'la rocca'"],
+                    ["Gibilterra","la colonia britannica che ha una superficie di soli 6 km quadrati"],
+                    ["Galateo","la famosa opera di Monsignor Della Casa"],
+                    ["Gotta","la malattia detta anche podagra"],
+                    ["Gala","la modella preferita da Salvador Dali'"],
+                    ["Godot","lo aspettava Samuel Beckett"],
+                    ["Goethe","lo scrittore tedesco che ha descritto nelle sue opere piu' di 2.000 paesaggi, dei quali circa la meta' italiani"],
+                    ["Gioia","Melchiorre, noto economista dell'800 considerato il fondatore della statistica in Italia"]
+                
+            ],   
+            "h":[                
+                    ["Hammet","il Dashiell autore de Il falcone maltese"],
+                    ["Heathcliff","il protagonista di Cime tempestose"],
+                    ["Harlem","il quartiere nero di New York"],
+                    ["Hill","il Terence che Continuavano a chiamarlo Trinita'"],
+                    ["Herrera","l'allenatore dell'inter Campione d'Europa nel 1964 e 1965"],
+                    ["Harvard","l'universita' di Love Story"],
+                    ["Hashish","la sostanza che permetteva a Baudelaire di raggiungere i paradisi artificiali"],
+                    ["Hertziane","le onde di cui si servi' Alessandro Marconi per il telegrafo senza fili"]              
+            ],   
+        }
+         
+        function GameSettings(options){
+            this.letters = options;                        
+            this.lettersEl = document.querySelectorAll("li");                    
+            this.newGameLetter = [];
+            this.questionsArray = [];
+            this.questions = [];
+            this.correctAnswer = [];
+            this.questionAssign(this.letters);
+            this.activeQuestionEl();
+            this.cd;
+            this.gp;
+            this.gameStarted = false;
+            this.gameFinished = false;
+            this.start();
+        };
+        GameSettings.prototype.questionAssign = function(obj){
+            Object.keys(obj).forEach(function(key) {
+                this.newGameLetter.push(key);
+                this.questionsArray.push(obj[key]);                    
+            }.bind(this));
+            
+            for (var i=0; this.questionsArray.length > i; i++){                
+                var random = [Math.floor(Math.random()*this.questionsArray[i].length)]
+                this.questions[i] = this.questionsArray[i][random]
+                //this.lettersEl[i].innerHTML = this.questions[i][1];
+                this.correctAnswer[i] = this.questions[i][0]
+                console.log(this.questions[i][1], "-------------  " + this.questions[i][0]);
+            }            
+        };
+        GameSettings.prototype.countDown = function(obj){
+        
+        };       
+        GameSettings.prototype.activeQuestionEl = function(obj){
+            for (var i=0; this.lettersEl.length >i; i++){
+                this.lettersEl[i].setAttribute("data-active","false"); 
+                this.lettersEl[0].setAttribute("data-active","true"); 
+                this.lettersEl[i].setAttribute("data-answered","false");
+                this.lettersEl[i].setAttribute("data-correct","");
+            }           
+        };
+        GameSettings.prototype.start = function(obj){
+            this.gameStarted = true;
+            this.gp = new GamePlay(this.lettersEl, this);
+            //this.cd = new  CircularCntdwn();
+        };
+        GameSettings.prototype.finish = function(obj){
+            this.gameFinished = true;
+            return true;            
+        };
+        
+        function GamePlay(el,gs){
+            this.input = document.getElementById("answer");
+            this.inputQ = document.getElementById("question");
+            this.currentQ;
+            this.activeL = [];
+            this.answeredL = [];
+            this.correctL = [];
+            for(var i=0; el.length > i; i++){
+                this.activeL[i] = el[i].getAttribute("data-active");
+                this.answeredL[i] = el[i].getAttribute("data-answered");
+                this.correctL[i] = el[i].getAttribute("data-correct");
+            }            
+            console.log(this.activeL,this.answeredL,this.correctL);
+            this.interaction(gs);
+        };
+        GamePlay.prototype.interaction = function(gs){             
+            var correct = gs.correctAnswer[0],
+            currentQ = "<strong>"+gs.questions[0][1]+"</strong>",
+            current =  gs.lettersEl[0], prev, next, index;
+            current.style.background = "gold";
+            
+            this.inputQ.innerHTML = currentQ;
+            this.input.addEventListener('keyup', function (e) {
+                if (e.keyCode == 13) {               
+                    for (var i=0; gs.correctAnswer.length > i; i++){                        
+                        index = parseInt(this.input.getAttribute("data-current").replace("q",""));                                  
+                        current =  gs.lettersEl[index];
+                        prev =  gs.lettersEl[index-1];
+                        next = gs.lettersEl[index+1];                        
+                        //current.setAttribute("data-answered","true");
+                        if (index == 0){                            
+                            current.setAttribute("data-active","false");                            
+                            next.setAttribute("data-active","true");
+                            current.setAttribute("data-answered","true");
+                        }
+                        if (index > 0 && index < (gs.lettersEl.length-1)){
+                            current.setAttribute("data-active","false");
+                            prev.setAttribute("data-active","false");
+                            next.setAttribute("data-active","true");
+                            current.setAttribute("data-answered","true");
+                        }
+                        if (index == (gs.lettersEl.length-1)){
+                            current.setAttribute("data-active","false");
+                            current.setAttribute("data-answered","true");
+                        }
+                        //console.log(current);                       
+                        if (this.input.value.toLowerCase() == correct.toLowerCase() && this.input.value.toLowerCase() != ""){
+                            this.input.value = "";
+                            console.log("giustoo!!!!");                            
+                            this.input.setAttribute("data-current","q"+(index+1)+"");
+                            if (index < gs.correctAnswer.length-1){
+                                correct = gs.questions[parseInt(this.input.getAttribute("data-current").replace("q",""))][0];
+                                currentQ = "<strong>"+gs.questions[parseInt(this.input.getAttribute("data-current").replace("q",""))][1]+"</strong>";
+                                this.inputQ.innerHTML = currentQ;
+                            }                           
+                            if (index < (gs.lettersEl.length)){
+                                current.style.background = "green";
+                                current.setAttribute("data-correct","true");
+                            } 
+                            if (index < (gs.lettersEl.length-1)){
+                                next.style.background = "gold";
+                            }                            
+                            break;
+                        } else {                            
+                            this.input.value = "";
+                            console.log("Sbagliatoooooo!!!!");                       
+                            this.input.setAttribute("data-current","q"+(index+1)+"");
+                            if (index < gs.correctAnswer.length-1){
+                                correct = gs.questions[parseInt(this.input.getAttribute("data-current").replace("q",""))][0];
+                                currentQ = "<strong>"+gs.questions[parseInt(this.input.getAttribute("data-current").replace("q",""))][1]+"</strong>";
+                                this.inputQ.innerHTML = currentQ;
+                            }                            
+                            if (index < (gs.lettersEl.length)){
+                                current.style.background = "red";
+                                current.setAttribute("data-correct","false");
+                            } 
+                            if (index < (gs.lettersEl.length-1)){
+                                next.style.background = "gold";
+                            }
+                            break;
+                        }
+                    }
+                }
+            }.bind(this));             
+        
+            this.input.addEventListener('keyup', function (e) {
+                if (e.keyCode == 32) { 
+                    for (var i=0; gs.correctAnswer.length > i; i++){
+                        index = parseInt(this.input.getAttribute("data-current").replace("q",""));                                  
+                        current =  gs.lettersEl[index];
+                        prev =  gs.lettersEl[index-1];
+                        next = gs.lettersEl[index+1];
+                        if (index == 0){                            
+                            current.setAttribute("data-active","false");                            
+                            next.setAttribute("data-active","true");                    
+                        }
+                        if (index > 0 && index < (gs.lettersEl.length-1)){
+                            current.setAttribute("data-active","false");
+                            prev.setAttribute("data-active","false");
+                            next.setAttribute("data-active","true");                   
+                        }
+                        if (index == (gs.lettersEl.length-1)){
+                            current.setAttribute("data-active","false");                    
+                        }
+                        this.input.value = "";
+                        console.log("passooooo!!!!");                            
+                        this.input.setAttribute("data-current","q"+(index+1)+"");
+                        if (index < gs.correctAnswer.length-1){
+                            correct = gs.questions[parseInt(this.input.getAttribute("data-current").replace("q",""))][0];
+                            currentQ = "<strong>"+gs.questions[parseInt(this.input.getAttribute("data-current").replace("q",""))][1]+"</strong>";
+                            this.inputQ.innerHTML = currentQ;
+                        }                           
+                        if (index < (gs.lettersEl.length)){
+                            current.style.background = "yellow";
+                            current.setAttribute("data-passed","true");
+                        } 
+                        if (index < (gs.lettersEl.length-1)){
+                            next.style.background = "gold";
+                        }                            
+                        break;
+                    };        
+                }
+            }.bind(this));
+        };
+        function CircularCntdwn(dt, id){
+            //this.end = new Date(dt); 
+            this.time = 120;           
+            this.svg = document.querySelector('.circle_animation');
+            this.timeMin = document.querySelector('h2 span#min');
+            this.timeSec = document.querySelector('h2 span#sec');
+            this.timeField = document.querySelector('h2');            
+            this.initialOffset = '440';            
+            i = 1
+            this.interval = setInterval(function() {                
+                this.svg.style.strokeDashoffset = this.initialOffset-(i*(this.initialOffset/this.time));
+                //this.timeSec.innerHTML = this.time -i;               
+                this.timeMin.innerHTML = this.formatSeconds(this.time-i);
+                //this.time--;               
+                if (i >= (this.time / 2)*1 && i <= ((this.time / 2)*1)+1) { 
+                    this.svg.style.stroke = "#ffd000";
+                    console.log("quartile1");                   
+                } else if (i >= (this.time / 3)*2 && i <= ((this.time / 3)*2)+1) {
+                    this.svg.style.stroke = "#ff9d00";
+                    console.log("quartile2")
+                } else if (i >= (this.time / 4)*3 && i <= ((this.time / 4)*3)+1) {
+                    this.svg.style.stroke = "#ff0000";
+                    console.log("quartile3")
+                } 
+                if (i == this.time) {
+                    clearInterval(this.interval);
+                }
+                i++;  
+            }.bind(this), 1000);            
+        };
+        CircularCntdwn.prototype.formatSeconds = function(secs) {
+            function pad(n) {
+                return (n < 10 ? "0" + n : n);
+            }                          
+            var m = Math.floor(secs / 60);
+            var s = Math.floor(secs - m * 60);
+            return pad(m) + ":" + pad(s);
+        };
+        
+        var a = new GameSettings(qa);
+        var cd = new  CircularCntdwn();       
+    </script>
+</html>
